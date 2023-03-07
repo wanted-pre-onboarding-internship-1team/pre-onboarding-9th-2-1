@@ -1,13 +1,5 @@
 import { useReservedListContext } from '../../contexts/ReservedListContext';
-import {
-  Button,
-  Card,
-  CardHeader,
-  Image,
-  Stack,
-  Text,
-  VStack,
-} from '@chakra-ui/react';
+import { Button, Card, Image, Stack, Text, VStack } from '@chakra-ui/react';
 
 const BasketProduct = ({ product }) => {
   const { deleteReserve } = useReservedListContext();
