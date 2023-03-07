@@ -2,7 +2,7 @@ import { PRODUCT_LIST_URL } from '../const/url';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 
-export default function useProductList() {
+const useProductList = () => {
   const [productList, setProductList] = useState([]);
 
   useEffect(() => {
@@ -13,4 +13,6 @@ export default function useProductList() {
     });
   }, []);
   return [productList];
-}
+};
+
+export default useProductList;
