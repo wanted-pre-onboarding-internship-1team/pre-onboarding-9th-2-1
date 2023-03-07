@@ -2,7 +2,6 @@ import LazyImage from '../common/LazyImage';
 import {
   ListItem,
   Card,
-  Image,
   Stack,
   CardBody,
   Heading,
@@ -24,7 +23,7 @@ function ProductItem({ idx, name, mainImage, price, spaceCategory }) {
         overflow='hidden'
         border='1px solid'
         borderColor='gray.300'>
-        <Image src={mainImage} alt={name} width='200px' />
+        <LazyImage src={mainImage} alt={name} width='200px' />
         <Stack>
           <CardBody>
             <Heading size='lg'>{`${idx}. ${name}`}</Heading>
