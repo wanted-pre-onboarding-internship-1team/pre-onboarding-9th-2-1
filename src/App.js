@@ -1,4 +1,5 @@
 import Router from './router/router';
+import { ChakraProvider } from '@chakra-ui/react';
 import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
@@ -11,7 +12,11 @@ function App() {
       navigate('/main');
     }
   }, []);
-  return <Router />;
+  return (
+    <ChakraProvider>
+      <Router />{' '}
+    </ChakraProvider>
+  );
 }
 
 export default App;
