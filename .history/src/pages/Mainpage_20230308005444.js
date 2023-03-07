@@ -11,7 +11,7 @@ export default function Mainpage() {
       px='0'
       position='relative'
       maxWidth='100vw'>
-      <Flex justify='center' width='100%' height='100%' p='1rem'>
+      <Flex justify='center' width='100%' height='100%'>
         <Suspense fallback={<div>로딩중</div>}>
           <TravelProductList />
         </Suspense>

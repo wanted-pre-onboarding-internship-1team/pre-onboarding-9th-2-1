@@ -1,6 +1,20 @@
 import useTravelProducts from '../../hooks/useTravelProducts';
 import TravelProductItem from './TravelProductItem';
-import { Grid } from '@chakra-ui/react';
+import {
+  Box,
+  Button,
+  ButtonGroup,
+  Card,
+  CardBody,
+  CardFooter,
+  Grid,
+  Heading,
+  HStack,
+  Image,
+  Stack,
+  Text,
+  useMediaQuery,
+} from '@chakra-ui/react';
 
 // {
 // 	"idx": 2,

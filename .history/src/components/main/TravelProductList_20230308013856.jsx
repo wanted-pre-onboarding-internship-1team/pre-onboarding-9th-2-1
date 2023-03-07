@@ -1,6 +1,18 @@
 import useTravelProducts from '../../hooks/useTravelProducts';
-import TravelProductItem from './TravelProductItem';
-import { Grid } from '@chakra-ui/react';
+import {
+  Box,
+  Button,
+  ButtonGroup,
+  Card,
+  CardBody,
+  CardFooter,
+  Grid,
+  Heading,
+  Image,
+  Stack,
+  Text,
+  useMediaQuery,
+} from '@chakra-ui/react';
 
 // {
 // 	"idx": 2,
@@ -19,18 +31,20 @@ export default function TravelProductList() {
     <Grid
       height='100%'
       width='100%'
-      justifyContent='center'
-      gridAutoRows='375px'
-      gap='1rem'
+      gridAutoRows='300px'
       gridTemplateColumns={{
         base: 'repeat(1, 100%)',
         sm: 'repeat(2, 300px)',
         md: 'repeat(3, 300px)',
-        xl: 'repeat(4, 300px)',
+        lg: 'repeat(4, 300px)',
       }}>
-      {data.map(item => (
-        <TravelProductItem {...item} />
-      ))}
+      <Box bg='red.200' w='100%' h='100%'>
+        <Image height='50%' src="https://picsum.photos/id/18/300/300",/>
+      </Box>
+      {/* {data.map(item => {
+        console.log(item);
+        return;
+      })} */}
     </Grid>
   );
 }

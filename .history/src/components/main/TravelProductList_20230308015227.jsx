@@ -1,6 +1,19 @@
 import useTravelProducts from '../../hooks/useTravelProducts';
-import TravelProductItem from './TravelProductItem';
-import { Grid } from '@chakra-ui/react';
+import {
+  Box,
+  Button,
+  ButtonGroup,
+  Card,
+  CardBody,
+  CardFooter,
+  Grid,
+  Heading,
+  HStack,
+  Image,
+  Stack,
+  Text,
+  useMediaQuery,
+} from '@chakra-ui/react';
 
 // {
 // 	"idx": 2,
@@ -20,17 +33,34 @@ export default function TravelProductList() {
       height='100%'
       width='100%'
       justifyContent='center'
-      gridAutoRows='375px'
-      gap='1rem'
+      gridAutoRows='400px'
       gridTemplateColumns={{
         base: 'repeat(1, 100%)',
         sm: 'repeat(2, 300px)',
         md: 'repeat(3, 300px)',
         xl: 'repeat(4, 300px)',
       }}>
-      {data.map(item => (
-        <TravelProductItem {...item} />
-      ))}
+      <Box w='100%' h='100%' p='0.8rem' borderRadius='0.8rem' boxShadow='xl'>
+        <Image
+          borderRadius='0.8rem'
+          height='60%'
+          width='100%'
+          src='https://picsum.photos/id/18/300/300'
+        />
+        <Stack mt='3' spacing='3'>
+          <Heading size='md'>1. Living room Sofa</Heading>
+          <HStack mt='0'>
+            <Text width='50%' fontSize='1.4rem'>
+              123
+            </Text>
+            <Text width='50%'>123</Text>
+          </HStack>
+        </Stack>
+      </Box>
+      {/* {data.map(item => {
+        console.log(item);
+        return;
+      })} */}
     </Grid>
   );
 }
