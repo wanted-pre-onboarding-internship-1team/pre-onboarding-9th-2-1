@@ -6,14 +6,21 @@ import {
   Heading,
   HStack,
   Image,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
   Stack,
   Text,
+  useDisclosure,
 } from '@chakra-ui/react';
 import { useCallback, useEffect, useRef } from 'react';
 
 export default function DetailProductItem() {
-  const { selectedItem, selectItem, handleAddProduct } =
-    useTravelProductContext();
+  const { selectedItem, selectItem } = useTravelProductContext();
   const ref = useRef(null);
 
   const onClose = useCallback(
@@ -71,17 +78,14 @@ export default function DetailProductItem() {
             {selectedItem.description}
           </Container>
           <HStack fontSize='1.2rem'>
-            <Text width='50%'>{selectedItem.price} 원</Text>
+            <Text width='50%'>{selectedItem.price}원</Text>
             <Text width='50%'>{selectedItem.spaceCategory}</Text>
           </HStack>
           <HStack fontSize='1.2rem'>
             <Text width='50%'>{`최대 구매 갯수: ${selectedItem.maximumPurchases}`}</Text>
             <Text width='50%'>{selectedItem.registrationDate}</Text>
           </HStack>
-          <Button
-            colorScheme='teal'
-            size='lg'
-            onClick={() => handleAddProduct(selectedItem)}>
+          <Button colorScheme='teal' size='lg'>
             예약하기
           </Button>
         </Stack>

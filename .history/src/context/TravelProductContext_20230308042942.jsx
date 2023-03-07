@@ -23,11 +23,10 @@ export default function TravelProductContextProvider({ children }) {
     item => {
       if (reservationList.find(i => i.idx === item.idx))
         return alert('이미 제품을 담으셨습니다.');
-
       setReservationList(prev => [...prev, item]);
       alert('상품을 장바구니에 담았습니다.');
     },
-    [reservationList]
+    [setReservationList]
   );
 
   const context = useMemo(

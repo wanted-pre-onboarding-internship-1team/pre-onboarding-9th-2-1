@@ -5,7 +5,7 @@ export default function useReservation() {
   const handleAddProduct = item => {
     if (reservationList.find(i => i.idx === item.idx))
       return alert('이미 제품을 담으셨습니다.');
-    setReservationList(prev => [...prev, item]);
+    reservationList.push(item);
   };
   return handleAddProduct;
 }

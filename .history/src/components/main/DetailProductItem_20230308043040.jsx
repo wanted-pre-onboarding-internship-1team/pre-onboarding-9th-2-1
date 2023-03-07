@@ -78,10 +78,7 @@ export default function DetailProductItem() {
             <Text width='50%'>{`최대 구매 갯수: ${selectedItem.maximumPurchases}`}</Text>
             <Text width='50%'>{selectedItem.registrationDate}</Text>
           </HStack>
-          <Button
-            colorScheme='teal'
-            size='lg'
-            onClick={() => handleAddProduct(selectedItem)}>
+          <Button colorScheme='teal' size='lg'>
             예약하기
           </Button>
         </Stack>

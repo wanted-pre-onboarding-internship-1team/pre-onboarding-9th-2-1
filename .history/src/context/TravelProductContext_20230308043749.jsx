@@ -19,17 +19,16 @@ export default function TravelProductContextProvider({ children }) {
     [setSelectedItem]
   );
 
-  const handleAddProduct = useCallback(
-    item => {
-      if (reservationList.find(i => i.idx === item.idx))
-        return alert('이미 제품을 담으셨습니다.');
+  const handleAddProduct = useCallback(item => {
+    console.log(reservationList);
+    console.log(reservationList.find(i => i.idx === item.idx));
 
-      setReservationList(prev => [...prev, item]);
-      alert('상품을 장바구니에 담았습니다.');
-    },
-    [reservationList]
-  );
-
+    if (reservationList.find(i => i.idx === item.idx))
+      return alert('이미 제품을 담으셨습니다.');
+    setReservationList(prev => [...prev, item]);
+    alert('상품을 장바구니에 담았습니다.');
+  }, []);
+  console.log(reservationList);
   const context = useMemo(
     () => ({ selectItem, selectedItem, handleAddProduct }),
     [selectedItem, selectItem, handleAddProduct]

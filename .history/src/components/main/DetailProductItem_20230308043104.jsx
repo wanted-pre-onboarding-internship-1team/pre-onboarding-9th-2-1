@@ -81,7 +81,7 @@ export default function DetailProductItem() {
           <Button
             colorScheme='teal'
             size='lg'
-            onClick={() => handleAddProduct(selectedItem)}>
+            onClick={() => handleAddProduct(selectItem)}>
             예약하기
           </Button>
         </Stack>
