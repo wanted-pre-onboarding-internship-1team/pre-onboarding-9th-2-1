@@ -1,5 +1,6 @@
 import LazyImage from '../common/LazyImage';
 import { useReservationContext } from '../reservation/ReservationContext';
+import ProductModal from './ProductModal';
 import {
   ListItem,
   Card,
@@ -10,16 +11,25 @@ import {
   CardFooter,
   Button,
 } from '@chakra-ui/react';
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 
 function ProductItem(props) {
   const { addReservation } = useReservationContext();
+  const [isShownModal, setIsShownModal] = useState(false);
+  const itemClickHandler = useCallback(() => {
+    setIsShownModal(true);
+  }, []);
+
   const btnClickHandler = useCallback(() => {
     addReservation(props);
   }, [addReservation, props]);
   return (
     <ListItem marginBottom='13px'>
+      {isShownModal && (
+        <ProductModal onClose={() => setIsShownModal(false)} {...props} />
+      )}
       <Card
+        onClick={itemClickHandler}
         _hover={{
           background: 'gray.50',
           cursor: 'pointer',
