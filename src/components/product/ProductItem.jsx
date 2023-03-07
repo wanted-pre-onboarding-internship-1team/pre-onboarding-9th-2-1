@@ -20,9 +20,13 @@ function ProductItem(props) {
     setIsShownModal(true);
   }, []);
 
-  const btnClickHandler = useCallback(() => {
-    addReservation(props);
-  }, [addReservation, props]);
+  const btnClickHandler = useCallback(
+    e => {
+      addReservation(props);
+      e.stopPropagation();
+    },
+    [addReservation, props]
+  );
   return (
     <ListItem marginBottom='13px'>
       {isShownModal && (
