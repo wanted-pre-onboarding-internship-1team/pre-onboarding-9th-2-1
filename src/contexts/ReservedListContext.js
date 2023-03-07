@@ -3,19 +3,17 @@ import { createContext, useContext, useReducer } from 'react';
 const ReservedListContext = createContext();
 
 const reserveListReducer = (state, action) => {
-  //TODO : localstorage와 sync
   switch (action.type) {
-    // case 'SET':
-    //   const { reservedList } = action;
-    //   return reservedList;
     case 'ADD':
       const { newReserve } = action;
       state.add(newReserve);
+      state = new Set(state);
       localStorage.setItem('reservedList', JSON.stringify(Array.from(state)));
       return state;
     case 'DELETE':
       const { deleteReserve } = action;
       state.delete(deleteReserve);
+      state = new Set(state);
       localStorage.setItem('reservedList', JSON.stringify(Array.from(state)));
       return state;
     default:
@@ -29,7 +27,6 @@ export const ReservedListProvider = ({ children }) => {
     return new Set(reservedList);
   };
 
-  //c.f. localstorage 로 예약상태 관리
   const [reserveList, dispatch] = useReducer(
     reserveListReducer,
     reserveListInitState()
