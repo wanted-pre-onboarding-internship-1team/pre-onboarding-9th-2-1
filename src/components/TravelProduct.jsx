@@ -1,16 +1,18 @@
-import React from 'react';
+import CustomModal from './CustomModal';
+import TravelProductInfo from './TravelProductInfo';
+import { Box, Button } from '@chakra-ui/react';
 
 const TravelProduct = ({ data }) => {
-  const { idx, name, mainImage, description, spaceCategory, price } = data;
+  const { name } = data;
+
   return (
-    <div>
-      <div>{idx}</div>
-      <img src={mainImage} alt={description} />
-      <div>{name}</div>
-      <div>{price}</div>
-      <div>{spaceCategory}</div>
-      <button>예약</button>
-    </div>
+    <Box border='1px' padding='0.625rem'>
+      <TravelProductInfo data={data} detail={false} />
+      <Button>예약</Button>
+      <CustomModal title={name}>
+        <TravelProductInfo data={data} detail={true} />
+      </CustomModal>
+    </Box>
   );
 };
 

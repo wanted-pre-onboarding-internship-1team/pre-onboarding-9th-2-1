@@ -13,6 +13,7 @@ import React from 'react';
 
 const CustomModal = ({ title, children }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+
   return (
     <>
       <Button onClick={onOpen}>자세히 보기</Button>
@@ -33,4 +34,5 @@ const CustomModal = ({ title, children }) => {
     </>
   );
 };
+
 export default CustomModal;
