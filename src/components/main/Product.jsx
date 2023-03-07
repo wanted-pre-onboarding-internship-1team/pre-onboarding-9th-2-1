@@ -13,7 +13,6 @@ import {
   HStack,
   Heading,
   VStack,
-  AbsoluteCenter,
   Stack,
 } from '@chakra-ui/react';
 

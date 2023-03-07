@@ -1,6 +1,7 @@
 import { useReservedListContext } from '../../contexts/ReservedListContext';
 import useProductList from '../../hooks/useProductList';
 import BasketProduct from './BasketProduct';
+import { VStack, Text, Stack, Divider } from '@chakra-ui/react';
 
 const Basket = () => {
   // TODO : react-query 적용하는게 맞지 않을까??
@@ -9,15 +10,19 @@ const Basket = () => {
   const { reserveList } = useReservedListContext();
 
   return (
-    <ul>
-      {productList
-        ?.filter(product => {
-          return reserveList?.has(product.idx);
-        })
-        .map(product => (
-          <BasketProduct product={product} key={product.idx} />
-        ))}
-    </ul>
+    <Stack>
+      <Text>장바구니</Text>
+      <Divider />
+      <VStack w='150px' h='100vh' overflow='scroll' gap={8}>
+        {productList
+          ?.filter(product => {
+            return reserveList?.has(product.idx);
+          })
+          .map(product => (
+            <BasketProduct product={product} key={product.idx} />
+          ))}
+      </VStack>
+    </Stack>
   );
 };
 
