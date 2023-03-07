@@ -1,13 +1,16 @@
 import Product from '../../components/Product';
-import { Box, UnorderedList } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 
 export default function Main() {
   const [productList, setProductList] = useState([]);
-  // const reservationList = [];
+  let reservationList = [];
 
   const handleReservation = reservationId => {
-    // reservationList = [...reservationList, productList.find({idx} => idx === )
+    reservationList = [
+      ...reservationList,
+      productList.find(({ idx }) => idx === reservationId),
+    ];
   };
 
   useEffect(() => {
