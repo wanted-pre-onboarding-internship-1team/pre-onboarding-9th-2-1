@@ -40,7 +40,7 @@ export default function TravelProductItem(data) {
           <Text width='50%'>{price}</Text>
           <Text width='50%'>{spaceCategory}</Text>
         </HStack>
-        <Button colorScheme='teal' size='lg' onClick={onClick}>
+        <Button colorScheme='teal' size='lg'>
           예약하기
         </Button>
       </Stack>
