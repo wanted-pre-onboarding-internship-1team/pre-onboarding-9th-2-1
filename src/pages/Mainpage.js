@@ -7,7 +7,16 @@ export default function Mainpage() {
   return (
     <ul>
       {productList?.map(product => (
-        <li>{product.name}</li>
+        <li key={product.idx}>
+          <div>
+            <span>{product.idx}</span>
+            <img src={product.mainImage} alt={product.name} />
+            <span>{product.name}</span>
+            <span>{product.price} 원</span>
+            <span>{product.spaceCategory}</span>
+          </div>
+          <button>예약하기</button>
+        </li>
       ))}
     </ul>
   );
