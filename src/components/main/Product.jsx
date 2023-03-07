@@ -1,6 +1,21 @@
 import { useModalProductContext } from '../../contexts/ModalProductContext';
 import ReserveButton from './ReserveButton';
 import ReservedCheckBox from './ReservedCheckBox';
+import {
+  Box,
+  Card,
+  CardHeader,
+  Flex,
+  GridItem,
+  Image,
+  Spacer,
+  Text,
+  HStack,
+  Heading,
+  VStack,
+  AbsoluteCenter,
+  Stack,
+} from '@chakra-ui/react';
 
 export const Product = ({ product }) => {
   const { setModalProduct } = useModalProductContext();
@@ -9,19 +24,35 @@ export const Product = ({ product }) => {
   // 장바구니 담을 때 animation 도 있었음 좋겠당 ㅎㅎ
 
   return (
-    <li>
-      <div
-        onClick={() => {
+    <GridItem>
+      <Card
+        onClick={e => {
           setModalProduct(product);
-        }}>
-        <ReservedCheckBox product={product} />
-        <span>{product.idx}</span>
-        <img src={product.mainImage} alt={product.name} />
-        <span>{product.name}</span>
-        <span>{product.price} 원</span>
-        <span>{product.spaceCategory}</span>
-      </div>
-      <ReserveButton product={product} />
-    </li>
+        }}
+        h='full'>
+        <CardHeader>
+          <Flex>
+            <Text>#{product.idx}</Text>
+            <Spacer />
+            <ReservedCheckBox product={product} />
+          </Flex>
+        </CardHeader>
+        <VStack>
+          <Image src={product.mainImage} alt={product.name} />
+          <Stack p={3}>
+            <Heading as='h2' size='sm'>
+              상품명 : {product.name}
+            </Heading>
+            <Text>지역 : {product.spaceCategory}</Text>
+            <HStack>
+              <Text>가격 : </Text>
+              <Text fontWeight='700'>{product.price.toLocaleString()}</Text>
+              <Text> 원</Text>
+            </HStack>
+          </Stack>
+          <ReserveButton product={product} />
+        </VStack>
+      </Card>
+    </GridItem>
   );
 };

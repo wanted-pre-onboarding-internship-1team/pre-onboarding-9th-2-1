@@ -8,10 +8,11 @@ const ReserveButton = ({ product }) => {
 
   return (
     <Button
-      colorScheme='blue'
+      colorScheme={reserveList?.has(product.idx) ? 'red' : 'blue'}
       mr={3}
       width='90%'
-      onClick={() => {
+      onClick={e => {
+        e.stopPropagation();
         if (reserveList?.has(product.idx)) {
           deleteReserve(product.idx);
           triggerRerender();
