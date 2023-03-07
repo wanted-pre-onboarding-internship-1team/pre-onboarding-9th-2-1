@@ -13,16 +13,21 @@ import {
   Text,
   useDisclosure,
 } from '@chakra-ui/react';
-import React from 'react';
+import React, { useState } from 'react';
 
 export default function Product({ product, handleReservation }) {
   const { idx, name, mainImage, price, spaceCategory } = product;
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [isHovering, setIsHovering] = useState(false);
 
   return (
     <ListItem display='inline-block' margin='9px'>
       <Card width={400} maxW='md' borderWidth={40}>
-        <CardBody onClick={onOpen}>
+        <CardBody
+          _hover={{ cursor: isHovering && 'pointer' }}
+          onMouseEnter={() => setIsHovering(true)}
+          onMouseLeave={() => setIsHovering(false)}
+          onClick={onOpen}>
           <Image
             src={mainImage}
             alt='상품이미지'
