@@ -1,3 +1,4 @@
+import Basket from '../components/main/Basket';
 import ProductList from '../components/main/ProductList';
 import ProductModal from '../components/modal/ProductModal';
 import { ModalProductProvider } from '../contexts/ModalProductContext';
@@ -10,6 +11,7 @@ const Mainpage = () => {
       <ModalProductProvider>
         <ProductList />
         <ProductModal />
+        <Basket />
       </ModalProductProvider>
     </ReservedListProvider>
   );
