@@ -39,7 +39,7 @@ export default function Product({ product, handleReservation }) {
             </Heading>
             <Text>{spaceCategory}</Text>
             <Text color='blue.600' fontSize='2xl'>
-              ₩ {price}
+              ₩ {price.toLocaleString()}
             </Text>
           </Stack>
         </CardBody>

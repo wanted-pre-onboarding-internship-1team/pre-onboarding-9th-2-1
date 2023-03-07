@@ -49,7 +49,7 @@ export default function ProductModal({ product, isOpen, onClose }) {
             <Stack>
               <CardBody>
                 <Heading size='md' pb='5px'>
-                  ₩ {price} / {spaceCategory}
+                  ₩ {price.toLocaleString()} / {spaceCategory}
                 </Heading>
                 <Text fontSize='13px'>
                   개인 최대 구매 횟수 : {maximumPurchases}
