@@ -1,5 +1,6 @@
 import Product from '../../components/Product';
 import { Box } from '@chakra-ui/react';
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
 export default function Main() {
@@ -23,10 +24,13 @@ export default function Main() {
   };
 
   useEffect(() => {
-    fetch('/data/mock_data.json')
-      .then(response => response.json())
-      .then(result => {
-        setProductList(result);
+    axios
+      .get('/data/mock_data.json')
+      .then(response => {
+        setProductList(response.data);
+      })
+      .catch(error => {
+        console.log(error);
       });
   }, []);
 
