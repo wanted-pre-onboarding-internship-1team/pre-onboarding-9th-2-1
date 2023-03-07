@@ -10,7 +10,15 @@ export default function Main() {
     reservationList = [
       ...reservationList,
       productList.find(({ idx }) => idx === reservationId),
-    ];
+    ].sort((a, b) => {
+      if (a.idx > b.idx) {
+        return 1;
+      }
+      if (a.idx < b.idx) {
+        return -1;
+      }
+      return 0;
+    });
   };
 
   useEffect(() => {
