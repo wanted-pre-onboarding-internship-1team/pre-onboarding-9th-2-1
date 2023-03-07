@@ -1,5 +1,5 @@
 import Product from '../../components/Product';
-import { Box } from '@chakra-ui/react';
+import { Box, UnorderedList } from '@chakra-ui/react';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
@@ -35,17 +35,19 @@ export default function Main() {
   }, []);
 
   return (
-    <Box paddingTop='80px' paddingBottom='100px'>
-      <Box marginLeft='60px' marginRight='60px'>
-        {productList.map(product => {
-          return (
-            <Product
-              product={product}
-              handleReservation={handleReservation}
-              key={product.idx}
-            />
-          );
-        })}
+    <Box paddingTop={70} paddingBottom={100}>
+      <Box textAlign='center'>
+        <UnorderedList maxW={1280} margin={[0, 'auto']} textAlign='left'>
+          {productList.map(product => {
+            return (
+              <Product
+                product={product}
+                handleReservation={handleReservation}
+                key={product.idx}
+              />
+            );
+          })}
+        </UnorderedList>
       </Box>
     </Box>
   );

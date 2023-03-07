@@ -8,6 +8,7 @@ import {
   Divider,
   Heading,
   Image,
+  ListItem,
   Stack,
   Text,
   useDisclosure,
@@ -19,13 +20,8 @@ export default function Product({ product, handleReservation }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
-    <>
-      <Card
-        width='sm'
-        maxW='md'
-        display='inline-block'
-        margin='30px'
-        borderWidth='40px'>
+    <ListItem display='inline-block' margin={30}>
+      <Card width='sm' maxW='md' borderWidth={40}>
         <CardBody onClick={onOpen}>
           <Image
             src={mainImage}
@@ -59,6 +55,6 @@ export default function Product({ product, handleReservation }) {
       </Card>
 
       <ProductModal product={product} isOpen={isOpen} onClose={onClose} />
-    </>
+    </ListItem>
   );
 }
