@@ -3,9 +3,9 @@ import { createContext, useContext, useState } from 'react';
 const ModalProductContext = createContext();
 
 export const ModalProductProvider = ({ children }) => {
-  const [ModalProduct, setModalProduct] = useState(null);
+  const [modalProduct, setModalProduct] = useState(null);
 
-  const value = { ModalProduct, setModalProduct };
+  const value = { modalProduct, setModalProduct };
 
   return (
     <ModalProductContext.Provider value={value}>

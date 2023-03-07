@@ -1,16 +1,16 @@
 import { useModalProductContext } from '../../contexts/ModalProductContext';
-import { Product } from '../main/Product';
+import { ModalProduct } from '../main/ModalProduct';
 
 const ProductModal = () => {
-  const { ModalProduct, setModalProduct } = useModalProductContext();
+  const { modalProduct, setModalProduct } = useModalProductContext();
 
-  if (!ModalProduct) {
+  if (!modalProduct) {
     return <></>;
   }
 
   return (
     <div>
-      <Product product={ModalProduct} />
+      <ModalProduct product={modalProduct} />
       <button
         onClick={() => {
           setModalProduct(null);

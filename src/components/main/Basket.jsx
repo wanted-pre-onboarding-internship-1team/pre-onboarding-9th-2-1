@@ -1,7 +1,6 @@
 import { useReservedListContext } from '../../contexts/ReservedListContext';
 import useProductList from '../../hooks/useProductList';
-import { Product } from './Product';
-import { useEffect } from 'react';
+import BasketProduct from './BasketProduct';
 
 const Basket = () => {
   // TODO : react-query 적용하는게 맞지 않을까??
@@ -9,9 +8,6 @@ const Basket = () => {
 
   const { reserveList } = useReservedListContext();
 
-  useEffect(() => {
-    console.log('hihi');
-  }, [productList.size]);
   return (
     <ul>
       {productList
@@ -19,7 +15,7 @@ const Basket = () => {
           return reserveList?.has(product.idx);
         })
         .map(product => (
-          <Product product={product} key={product.idx} />
+          <BasketProduct product={product} key={product.idx} />
         ))}
     </ul>
   );
