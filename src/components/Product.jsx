@@ -20,8 +20,8 @@ export default function Product({ product, handleReservation }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
-    <ListItem display='inline-block' margin={30}>
-      <Card width='sm' maxW='md' borderWidth={40}>
+    <ListItem display='inline-block' margin='9px'>
+      <Card width={400} maxW='md' borderWidth={40}>
         <CardBody onClick={onOpen}>
           <Image
             src={mainImage}
