@@ -1,10 +1,13 @@
+import { ReservationContextProvider } from './components/reservation/ReservationContext';
 import Router from './router/router';
 import { ChakraProvider } from '@chakra-ui/react';
 
 function App() {
   return (
     <ChakraProvider>
-      <Router />
+      <ReservationContextProvider>
+        <Router />
+      </ReservationContextProvider>
     </ChakraProvider>
   );
 }

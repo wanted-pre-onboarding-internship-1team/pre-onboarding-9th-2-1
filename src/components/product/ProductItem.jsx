@@ -1,4 +1,5 @@
 import LazyImage from '../common/LazyImage';
+import { useReservationContext } from '../reservation/ReservationContext';
 import {
   ListItem,
   Card,
@@ -9,9 +10,13 @@ import {
   CardFooter,
   Button,
 } from '@chakra-ui/react';
-import React from 'react';
+import React, { useCallback } from 'react';
 
-function ProductItem({ idx, name, mainImage, price, spaceCategory }) {
+function ProductItem(props) {
+  const { addReservation } = useReservationContext();
+  const btnClickHandler = useCallback(() => {
+    addReservation(props);
+  }, [addReservation, props]);
   return (
     <ListItem marginBottom='13px'>
       <Card
@@ -23,15 +28,15 @@ function ProductItem({ idx, name, mainImage, price, spaceCategory }) {
         overflow='hidden'
         border='1px solid'
         borderColor='gray.300'>
-        <LazyImage src={mainImage} alt={name} width='200px' />
+        <LazyImage src={props?.mainImage} alt={props?.name} width='200px' />
         <Stack>
           <CardBody>
-            <Heading size='lg'>{`${idx}. ${name}`}</Heading>
-            <Text fontSize='xl'>{spaceCategory}</Text>
+            <Heading size='lg'>{`${props?.idx} ${props?.name}`}</Heading>
+            <Text fontSize='xl'>{props?.spaceCategory}</Text>
           </CardBody>
           <CardFooter flexDirection='column'>
-            <Text as='b'>{`${price.toLocaleString()} 원`}</Text>
-            <Button colorScheme='green' maxW='5rem'>
+            <Text as='b'>{`${props?.price.toLocaleString()} 원`}</Text>
+            <Button colorScheme='green' maxW='5rem' onClick={btnClickHandler}>
               예약
             </Button>
           </CardFooter>
