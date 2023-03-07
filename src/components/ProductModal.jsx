@@ -1,6 +1,6 @@
 import {
+  Box,
   Card,
-  CardBody,
   Heading,
   Image,
   Modal,
@@ -28,9 +28,9 @@ export default function ProductModal({ product, isOpen, onClose }) {
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
-      <ModalOverlay />
-      <ModalContent width={900}>
-        <ModalHeader paddingBottom={1}>
+      <ModalOverlay alignItems='center' />
+      <ModalContent maxWidth={600} padding='10px'>
+        <ModalHeader paddingBottom={3}>
           {idx}. {name}
         </ModalHeader>
         <ModalCloseButton />
@@ -47,8 +47,8 @@ export default function ProductModal({ product, isOpen, onClose }) {
             />
 
             <Stack>
-              <CardBody>
-                <Heading size='md' pb='5px'>
+              <Box paddingLeft='10px'>
+                <Heading size='md' pb='10px'>
                   ₩ {price.toLocaleString()} / {spaceCategory}
                 </Heading>
                 <Text fontSize='13px'>
@@ -58,7 +58,7 @@ export default function ProductModal({ product, isOpen, onClose }) {
                   {registrationDate}
                 </Text>
                 <Text py='2'>{description}</Text>
-              </CardBody>
+              </Box>
             </Stack>
           </Card>
         </ModalBody>
