@@ -15,8 +15,16 @@ const TravelProductInfo = ({ data, detail }) => {
 
   return (
     <Box>
-      <Box>{idx}</Box>
-      <Box>{name}</Box>
+      <Box
+        display='inline-block'
+        borderRadius='md'
+        bg='black'
+        color='white'
+        px={4}
+        h={8}>
+        {idx}
+      </Box>
+      <Box display='inline-block'>{name}</Box>
       <Box maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
         <Image
           width='100%'
@@ -32,27 +40,29 @@ const TravelProductInfo = ({ data, detail }) => {
             <Badge borderRadius='full' px='2' colorScheme='teal'>
               {spaceCategory}
             </Badge>
+            {detail && (
+              <Box
+                color='gray.500'
+                fontWeight='semibold'
+                letterSpacing='wide'
+                fontSize='xs'
+                textTransform='uppercase'
+                ml='2'>
+                등록일 {registrationDate} &bull; 최대구매수량
+                {maximumPurchases}
+              </Box>
+            )}
+          </Box>
+          {detail && (
             <Box
-              color='gray.500'
+              mt='1'
               fontWeight='semibold'
-              letterSpacing='wide'
-              fontSize='xs'
-              textTransform='uppercase'
-              ml='2'>
-              등록일 {registrationDate} &bull; 최대구매수량
-              {maximumPurchases}
+              as='h4'
+              lineHeight='tight'
+              noOfLines={1}>
+              {description}
             </Box>
-          </Box>
-
-          <Box
-            mt='1'
-            fontWeight='semibold'
-            as='h4'
-            lineHeight='tight'
-            noOfLines={1}>
-            {description}
-          </Box>
-
+          )}
           <Box>
             {price}
             <Box as='span' color='gray.600' fontSize='sm'>
