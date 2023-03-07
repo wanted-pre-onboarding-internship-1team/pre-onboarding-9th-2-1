@@ -1,4 +1,5 @@
 import fetchProducts from '../../util/apis/fetchProducts';
+import ProductList from './ProductList';
 import React, { useState, useEffect } from 'react';
 
 function Products() {
@@ -8,7 +9,8 @@ function Products() {
       setItems(response);
     });
   }, []);
-  return <div>main</div>;
+
+  return <ProductList products={products} />;
 }
 
 export default Products;
