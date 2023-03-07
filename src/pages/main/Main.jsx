@@ -7,6 +7,7 @@ export default function Main() {
   let reservationList = [];
 
   const handleReservation = reservationId => {
+    alert('예약완료🎉');
     reservationList = [
       ...reservationList,
       productList.find(({ idx }) => idx === reservationId),
