@@ -40,7 +40,7 @@ export default function ProductModal({ isOpen, modalData, closeModal }) {
         <ModalBody>
           {modalData.description}{' '}
           <Text color='twitter.400' fontSize='2xl' mt='3'>
-            {modalData.price}원
+            {modalData.price.toLocaleString('ko-KR')}원
           </Text>
           <Text> (1인 최대 구매수량: {modalData.maximumPurchases}매) </Text>
         </ModalBody>
