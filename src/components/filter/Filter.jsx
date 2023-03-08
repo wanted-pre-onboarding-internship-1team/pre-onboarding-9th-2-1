@@ -18,7 +18,7 @@ function renderFilterIcon(flag) {
   if (!flag) {
     return <Icon boxSize={6} as={MdFilterAlt} cursor='pointer' />;
   }
-  return <Icon boxSize={6} as={MdFilterAltOff} cursor='pointer' />;
+  return <Icon boxSize={6} as={MdFilterAltOff} color='red' cursor='pointer' />;
 }
 
 function Filter() {
