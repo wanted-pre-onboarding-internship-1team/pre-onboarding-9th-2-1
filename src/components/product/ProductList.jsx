@@ -3,13 +3,7 @@ import ProductItem from './ProductItem';
 import { Divider, VStack } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 
-const ProductList = () => {
-  const [productList, setProductList] = useState([]);
-
-  useEffect(() => {
-    getProduct().then(({ data }) => setProductList(data));
-  }, []);
-
+const ProductList = ({ productList }) => {
   return (
     <VStack
       divider={<Divider borderColor='gray.200' />}
