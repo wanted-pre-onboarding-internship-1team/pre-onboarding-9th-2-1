@@ -6,7 +6,7 @@ export default function router() {
   return (
     <Routes>
       <Route path='/' element={<Navigate to='/main' />} />
-      <Route path='main' element={<Mainpage />} />
+      <Route path='/main' element={<Mainpage />} />
     </Routes>
   );
 }
