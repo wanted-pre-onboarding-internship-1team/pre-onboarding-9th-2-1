@@ -94,14 +94,13 @@ export const useFilterProduct = initialState => {
       },
     });
   }, []);
-  return [
-    filterProduct,
-    {
-      setFilterProduct,
-      resetFilterProduct,
-      spaceFilterProduct,
-      priceFilterProduct,
-      allFilterProduct,
-    },
-  ];
+
+  const actions = {
+    setFilterProduct,
+    resetFilterProduct,
+    spaceFilterProduct,
+    priceFilterProduct,
+    allFilterProduct,
+  };
+  return [filterProduct, actions];
 };
