@@ -9,11 +9,7 @@ import {
   Tooltip,
 } from '@chakra-ui/react';
 
-export const PriceFilter = ({
-  handlePriceChange,
-  selectedPrice,
-  selectPrice,
-}) => {
+export const PriceFilter = ({ handlePriceChange, selectPrice }) => {
   return (
     <Stack direction='row' spacing='6'>
       <Text fontSize='lg' fontWeight='bold'>
@@ -26,7 +22,6 @@ export const PriceFilter = ({
         max={30000}
         step={5000}
         defaultValue={[0, 30000]}
-        value={selectedPrice}
         onChange={handlePriceChange}
         w='70%'>
         <RangeSliderTrack>
