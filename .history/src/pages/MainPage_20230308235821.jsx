@@ -1,9 +1,11 @@
+
 import Header from '../components/common/Header';
 import ProductFilter from '../components/product/ProductFilter';
 import useFilterProduct from '../hooks/useFilterProduct';
+
 import ProductList from './../components/product/ProductList';
-import { Container, Icon } from '@chakra-ui/react';
-import React from 'react';
+import { Container,  Icon } from '@chakra-ui/react';
+import Reactfrom 'react';
 import { BsCart2 } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 
