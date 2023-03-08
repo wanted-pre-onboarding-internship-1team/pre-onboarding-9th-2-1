@@ -27,7 +27,6 @@ const CustomModal = ({ title, children }) => {
             <Button colorScheme='blue' mr={3} onClick={onClose}>
               닫기
             </Button>
-            <Button variant='ghost'> 예약 </Button>
           </ModalFooter>
         </ModalContent>
       </Modal>

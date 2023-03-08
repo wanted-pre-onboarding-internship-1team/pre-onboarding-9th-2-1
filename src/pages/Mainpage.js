@@ -6,13 +6,13 @@ const Mainpage = () => {
   const navigate = useNavigate();
   return (
     <>
-      <TravelProductList />
       <Button
         onClick={() => {
           navigate('/reservations');
         }}>
         장바구니로 이동
       </Button>
+      <TravelProductList />
     </>
   );
 };

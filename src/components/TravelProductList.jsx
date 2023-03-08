@@ -5,10 +5,11 @@ import {
   NumberInputField,
   Checkbox,
   Stack,
-  Box,
   CheckboxGroup,
 } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
+
+const locations = ['서울', '부산'];
 
 const TravelProductList = () => {
   const [products, setProducts] = useState([]);
@@ -60,12 +61,13 @@ const TravelProductList = () => {
 
   return (
     <>
-      <Box>
-        {filter.minimumPrice} {filter.maximumPrice} {filter.category.toString()}
-      </Box>
       <Stack shouldWrapChildren direction='row'>
         <NumberInput size='md' maxW={24} defaultValue={0} min={0}>
-          <NumberInputField name='minimumPrice' onChange={handleInput} />
+          <NumberInputField
+            name='minimumPrice'
+            onChange={handleInput}
+            max={filter.maximumPrice}
+          />
         </NumberInput>
         <NumberInput
           size='md'
@@ -74,7 +76,7 @@ const TravelProductList = () => {
           min={filter.minimumPrice}>
           <NumberInputField name='maximumPrice' onChange={handleInput} />
         </NumberInput>
-        <FilterBox locations={['서울', '부산']} handleCheck={handleCheck} />
+        <FilterBox locations={locations} handleCheck={handleCheck} />
       </Stack>
 
       <div>
