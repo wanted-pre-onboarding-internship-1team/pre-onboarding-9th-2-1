@@ -14,7 +14,7 @@ export default function MainPage() {
 
   return (
     <Container maxW='container.sm' backgroundColor='white'>
-      <Header rightComp={rightComp()} />
+      <Header noBackBtn={true} rightComp={rightComp()} />
       <ProductList />
     </Container>
   );

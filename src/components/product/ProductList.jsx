@@ -1,3 +1,4 @@
+import Filter from '../filter/Filter';
 import { getProduct } from './../../apis/api';
 import ProductItem from './ProductItem';
 import { Divider, VStack } from '@chakra-ui/react';
@@ -16,6 +17,7 @@ const ProductList = () => {
       spacing={4}
       align='stretch'
       p={5}>
+      <Filter />
       {productList &&
         productList.map(product => (
           <ProductItem key={product.idx} product={product} />
