@@ -17,8 +17,7 @@ const InitializeMin = 0;
 const InitializeMax = 50000;
 
 export default function ProductFilter(props) {
-  const { slideValue, area, onSlideChange, onInputChange, onSubmit, onReset } =
-    props;
+  const { slideValue, area, onSlideChange, onInputChange, onSubmit } = props;
 
   return (
     <FormControl
@@ -72,11 +71,7 @@ export default function ProductFilter(props) {
         <Button mt={4} colorScheme='teal' type='submit'>
           적용
         </Button>
-        <Button
-          mt={4}
-          colorScheme='teal'
-          type='button'
-          onClick={() => onReset()}>
+        <Button mt={4} colorScheme='teal' type='button'>
           리셋
         </Button>
       </Flex>

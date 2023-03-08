@@ -28,10 +28,6 @@ export default function useFilterProduct() {
     );
   };
 
-  const onReset = () => {
-    setFilteredList([...originList]);
-  };
-
   useEffect(() => {
     getProduct().then(({ data }) => {
       setOriginList(data);
@@ -46,7 +42,6 @@ export default function useFilterProduct() {
     onSlideChange,
     onInputChange,
     onSubmit,
-    onReset,
   };
 }
 

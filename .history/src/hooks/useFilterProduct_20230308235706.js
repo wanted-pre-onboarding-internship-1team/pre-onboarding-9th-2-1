@@ -46,7 +46,6 @@ export default function useFilterProduct() {
     onSlideChange,
     onInputChange,
     onSubmit,
-    onReset,
   };
 }
 

@@ -17,9 +17,8 @@ const InitializeMin = 0;
 const InitializeMax = 50000;
 
 export default function ProductFilter(props) {
-  const { slideValue, area, onSlideChange, onInputChange, onSubmit, onReset } =
-    props;
-
+  const { slideValue, area, onSlideChange, onInputChange, onSubmit } = props;
+  console.log(slideValue, area, onSlideChange, onInputChange, onSubmit);
   return (
     <FormControl
       as='form'
@@ -68,18 +67,9 @@ export default function ProductFilter(props) {
       </RangeSlider>
       <FormLabel mt='4'>지역</FormLabel>
       <Input placeholder='지역' value={area} onChange={onInputChange} />
-      <Flex justifyContent='space-between'>
-        <Button mt={4} colorScheme='teal' type='submit'>
-          적용
-        </Button>
-        <Button
-          mt={4}
-          colorScheme='teal'
-          type='button'
-          onClick={() => onReset()}>
-          리셋
-        </Button>
-      </Flex>
+      <Button mt={4} colorScheme='teal' type='submit'>
+        적용
+      </Button>
     </FormControl>
   );
 }
