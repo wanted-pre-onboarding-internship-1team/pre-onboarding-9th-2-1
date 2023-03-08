@@ -1,11 +1,18 @@
 import TravelProductList from '../components/TravelProductList';
+import { Button } from '@chakra-ui/react';
+import { useNavigate } from 'react-router-dom';
 
 const Mainpage = () => {
+  const navigate = useNavigate();
   return (
     <>
-      <div>메인페이지...</div>
       <TravelProductList />
-      <button>장바구니로 이동</button>
+      <Button
+        onClick={() => {
+          navigate('/reservations');
+        }}>
+        장바구니로 이동
+      </Button>
     </>
   );
 };
