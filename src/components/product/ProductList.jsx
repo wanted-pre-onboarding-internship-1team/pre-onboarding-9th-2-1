@@ -1,15 +1,19 @@
 import { getProduct } from './../../apis/api';
+import ProductFilter from './ProductFilter';
 import ProductItem from './ProductItem';
-import { Divider, VStack } from '@chakra-ui/react';
+import { Divider, VStack, Button } from '@chakra-ui/react';
+import { useDisclosure } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 
 const ProductList = () => {
   const [productList, setProductList] = useState([]);
   const [condition, setCondition] = useState({
     min: 0,
-    max: 1000000,
+    max: 100000,
     categories: [],
   });
+
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const filterProducts = product => {
     const { price, spaceCategory } = product;
@@ -32,6 +36,19 @@ const ProductList = () => {
       spacing={4}
       align='stretch'
       p={5}>
+      <Button
+        onClick={onOpen}
+        width='20%'
+        colorScheme='teal'
+        size='md'
+        align='right'>
+        검색 조건
+      </Button>
+      <ProductFilter
+        isOpen={isOpen}
+        onClose={onClose}
+        setCondition={setCondition}
+      />
       {productList &&
         productList
           .filter(filterProducts)
