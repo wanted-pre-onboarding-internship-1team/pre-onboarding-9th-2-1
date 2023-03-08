@@ -18,6 +18,7 @@ import React from 'react';
 
 const ShowProduct = ({ productData }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+
   return (
     <Flex align='center' flex='0 1 33%' padding='5px'>
       <Card maxW='sm'>
