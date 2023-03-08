@@ -33,8 +33,7 @@ const ProductDetail = ({ isOpen, onClose, product }) => {
   } = product;
   const { addProduct } = useProductActionContext();
 
-  const onClickHandler = e => {
-    e.stopPropagation();
+  const onClickHandler = () => {
     addProduct(product);
   };
 
@@ -42,7 +41,11 @@ const ProductDetail = ({ isOpen, onClose, product }) => {
     <Modal isOpen={isOpen} onClose={onClose} isCentered>
       <ModalOverlay />
       <ModalContent overflow='hidden'>
-        <ModalCloseButton backgroundColor='white' borderRadius='full' />
+        <ModalCloseButton
+          backgroundColor='white'
+          borderRadius='full'
+          zIndex={10}
+        />
 
         <AspectRatio w='100%' ratio={1}>
           <Image src={mainImage} objectFit='cover' width='100%' />
