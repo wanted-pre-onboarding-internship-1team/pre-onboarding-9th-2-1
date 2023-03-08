@@ -22,22 +22,42 @@ function renderFilterIcon(flag) {
 }
 
 function Filter() {
-  const { spaceFilterProduct, resetFilterProduct } = useFilterActionContext();
+  const {
+    spaceFilterProduct,
+    resetFilterProduct,
+    priceFilterProduct,
+    allFilterProduct,
+  } = useFilterActionContext();
   const [flag, setFlag] = useBoolean();
   const [selectedSpace, setSelectedSpace] = useState([]);
   const [priceFilter, setPriceFilter] = useState([]);
+
   const submitFilter = useCallback(() => {
-    spaceFilterProduct(selectedSpace);
-    if (selectedSpace.length === 0) {
-      setFlag.off();
-      return;
+    if (selectedSpace.length === 0 && priceFilter.length !== 0)
+      priceFilterProduct(priceFilter);
+    else if (selectedSpace.length !== 0 && priceFilter.length === 0)
+      spaceFilterProduct(selectedSpace);
+    else if (selectedSpace.length !== 0 && priceFilter.length !== 0) {
+      allFilterProduct({ selectedSpace, priceFilter });
     }
-    setFlag.on();
-  }, [selectedSpace, setFlag, spaceFilterProduct]);
+    if (selectedSpace.length === 0 && priceFilter.length === 0) {
+      resetFilterProduct();
+      setFlag.off();
+    } else setFlag.on();
+  }, [
+    allFilterProduct,
+    priceFilter,
+    priceFilterProduct,
+    resetFilterProduct,
+    selectedSpace,
+    setFlag,
+    spaceFilterProduct,
+  ]);
 
   const resetHandler = useCallback(() => {
     resetFilterProduct();
     setSelectedSpace([]);
+    setPriceFilter([]);
   }, [resetFilterProduct]);
   return (
     <Box position='relative' float='right'>

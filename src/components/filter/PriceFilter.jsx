@@ -11,10 +11,19 @@ function PriceFilter({ priceFilter, setPriceFilter }) {
     if (isDuplicateRange(priceFilter, min, max)) return;
     setPriceFilter(prev => [...prev, { min, max }]);
   };
+
+  const removePriceFilterHandler = ({ min, max }) => {
+    setPriceFilter(prev =>
+      prev.filter(range => range.min !== min && range.max !== max)
+    );
+  };
   return (
     <VStack mb={3}>
       <PriceRangeInput onAdd={addPriceFilterHandler} />
-      <PriceFilterList priceFilter={priceFilter} />
+      <PriceFilterList
+        priceFilter={priceFilter}
+        onRemove={removePriceFilterHandler}
+      />
     </VStack>
   );
 }

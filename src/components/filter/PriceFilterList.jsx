@@ -2,7 +2,7 @@ import { Tag, HStack, TagLabel, TagRightIcon } from '@chakra-ui/react';
 import React from 'react';
 import { MdDeleteForever } from 'react-icons/md';
 
-function PriceFilterList({ priceFilter }) {
+function PriceFilterList({ priceFilter, onRemove }) {
   return (
     <HStack>
       {priceFilter?.map((range, index) => (
@@ -15,7 +15,8 @@ function PriceFilterList({ priceFilter }) {
             cursor: 'pointer',
             color: 'red',
             outline: '1px solid red',
-          }}>
+          }}
+          onClick={() => onRemove({ min: range.min, max: range.max })}>
           <TagLabel>{`${range.min}~${range.max}`}</TagLabel>
           <TagRightIcon as={MdDeleteForever} />
         </Tag>
