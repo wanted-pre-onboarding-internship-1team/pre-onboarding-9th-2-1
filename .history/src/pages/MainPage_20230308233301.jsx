@@ -16,6 +16,7 @@ export default function MainPage() {
     </Link>
   );
 
+  const productList = useProductList();
   const { filteredList, ...rest } = useFilterProduct();
 
   return (

@@ -21,11 +21,12 @@ export default function useFilterProduct() {
   const onSubmit = e => {
     e.preventDefault();
 
-    setFilteredList(
-      originList.filter(item =>
+    console.log(
+      filteredList.filter(item =>
         filter(item, slideValue[0], slideValue[1], area)
       )
     );
+    console.log('submit');
   };
 
   useEffect(() => {
@@ -49,6 +50,8 @@ function filter(item, minVal, maxVal, area) {
   if (!(minVal <= item.price && item.price <= maxVal)) return false;
   //가격 비교 후 area가 빈칸이면 ture
   if (area === '') return true;
-  if (area !== item.spaceCategory) return false;
+  if (area !== item.area) return false;
   return true;
 }
+
+console.log('' == false);

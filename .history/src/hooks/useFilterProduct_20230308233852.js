@@ -21,11 +21,9 @@ export default function useFilterProduct() {
   const onSubmit = e => {
     e.preventDefault();
 
-    setFilteredList(
-      originList.filter(item =>
-        filter(item, slideValue[0], slideValue[1], area)
-      )
-    );
+    originList.filter(item => filter(item, slideValue[0], slideValue[1], area));
+
+    console.log('submit');
   };
 
   useEffect(() => {

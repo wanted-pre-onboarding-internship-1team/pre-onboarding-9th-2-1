@@ -16,8 +16,9 @@ export default function MainPage() {
     </Link>
   );
 
+  const productList = useProductList();
   const { filteredList, ...rest } = useFilterProduct();
-
+  console.log(filteredList);
   return (
     <Container maxW='container.sm' backgroundColor='white'>
       <Header rightComp={rightComp()} />
