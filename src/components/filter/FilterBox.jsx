@@ -1,5 +1,5 @@
-import PriceFilter from './PriceFilter';
-import SpaceFilter from './SpaceFilter';
+import PriceFilter from './pricefilter/PriceFilter';
+import SpaceFilter from './spacefilter/SpaceFilter';
 import React from 'react';
 
 function FilterBox({
