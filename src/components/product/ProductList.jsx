@@ -1,3 +1,4 @@
+import { useProductFilterValueContext } from '../../contexts/ProductFilterContext';
 import { getProduct } from './../../apis/api';
 import ProductItem from './ProductItem';
 import { Divider, VStack } from '@chakra-ui/react';
@@ -5,10 +6,18 @@ import React, { useEffect, useState } from 'react';
 
 const ProductList = () => {
   const [productList, setProductList] = useState([]);
+  const { products } = useProductFilterValueContext();
 
   useEffect(() => {
-    getProduct().then(({ data }) => setProductList(data));
+    getProduct().then(({ data }) => {
+      localStorage.setItem('productList', JSON.stringify(data));
+      setProductList(data);
+    });
   }, []);
+
+  useEffect(() => {
+    products && setProductList(products);
+  }, [products]);
 
   return (
     <VStack

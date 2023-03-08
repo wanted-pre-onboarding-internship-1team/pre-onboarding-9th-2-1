@@ -1,3 +1,4 @@
+import { useProductFilterActionContext } from '../../contexts/ProductFilterContext';
 import {
   RangeSlider,
   RangeSliderFilledTrack,
@@ -7,12 +8,13 @@ import {
 } from '@chakra-ui/react';
 import React, { useState } from 'react';
 
-export default function Price({ setPriceRange }) {
+export default function Price() {
   const [sliderValue, setSliderValue] = useState([10000, 30000]);
+  const { filterByPrice } = useProductFilterActionContext();
 
   const handleValue = val => {
     setSliderValue(val);
-    setPriceRange(val);
+    filterByPrice(val);
   };
 
   return (

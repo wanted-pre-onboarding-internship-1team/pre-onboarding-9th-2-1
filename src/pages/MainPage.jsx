@@ -1,7 +1,7 @@
 import Header from '../components/common/Header';
 import Filter from '../components/filter/Filter';
-import Place from '../components/filter/Place';
 import Price from '../components/filter/Price';
+import Space from '../components/filter/Space';
 import ProductList from './../components/product/ProductList';
 import { Container, Icon } from '@chakra-ui/react';
 import React, { useState } from 'react';
@@ -10,15 +10,14 @@ import { Link } from 'react-router-dom';
 
 export default function MainPage() {
   const [currentTab, setCurrentTab] = useState('');
-  const [priceRange, setPriceRange] = useState([]);
 
   const TABS = [
     {
       id: 1,
       title: '가격순',
-      content: <Price setPriceRange={setPriceRange} />,
+      content: <Price />,
     },
-    { id: 2, title: '공간순', content: <Place /> },
+    { id: 2, title: '공간순', content: <Space /> },
   ];
 
   const rightComp = () => (
