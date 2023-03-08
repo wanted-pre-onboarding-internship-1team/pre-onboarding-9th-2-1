@@ -88,27 +88,6 @@ function Filter() {
       </Popover>
     </Box>
   );
-  //   if (!flag) {
-  //     return (
-  //       <Icon
-  //         boxSize={6}
-  //         as={MdFilterAlt}
-  //         cursor='pointer'
-  //         onClick={setFlag.on}
-  //       />
-  //     );
-  //   }
-  //   return (
-  //     <React.Fragment>
-  //       <Icon
-  //         boxSize={6}
-  //         as={MdFilterAltOff}
-  //         cursor='pointer'
-  //         onClick={setFlag.off}
-  //       />
-  //       <FilterBox />
-  //     </React.Fragment>
-  //   );
 }
 
 export default Filter;
