@@ -1,9 +1,11 @@
 import Nav from '../../components/common/Nav';
-import Products from '../../components/main/Products';
+import ProductList from '../../components/main/ProductList';
+import { useReservedItem } from '../../components/reservation/ReservationContext';
 import React, { useEffect, useState } from 'react';
 
 export default function Mainpage() {
   const [data, setData] = useState([]);
+  const { addReservedItem } = useReservedItem();
 
   useEffect(() => {
     fetch(
@@ -17,7 +19,7 @@ export default function Mainpage() {
   return (
     <>
       <Nav />
-      <Products products={data} />
+      <ProductList products={data} addReservedItem={addReservedItem} />
     </>
   );
 }
