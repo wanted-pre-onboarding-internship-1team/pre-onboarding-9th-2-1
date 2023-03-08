@@ -12,7 +12,10 @@ const ProductList = () => {
   const filterProduct = useFilterValueContext();
   const { setFilterProduct } = useFilterActionContext();
   useEffect(() => {
-    getProduct().then(({ data }) => setFilterProduct(data));
+    getProduct().then(({ data }) => {
+      localStorage.setItem('originProductList', JSON.stringify(data));
+      setFilterProduct(data);
+    });
   }, [setFilterProduct]);
 
   return (
