@@ -14,6 +14,26 @@ import {
 import React, { useCallback, useState } from 'react';
 import { MdFilterAlt, MdFilterAltOff } from 'react-icons/md';
 
+// 금액만 필터링
+const isPriceFilter = ({ selectedSpace, priceFilter }) => {
+  return selectedSpace.length === 0 && priceFilter.length !== 0;
+};
+
+// 공간만 필터링
+const isSpaceFilter = ({ selectedSpace, priceFilter }) => {
+  return selectedSpace.length !== 0 && priceFilter.length === 0;
+};
+
+// 공간과 금액 모두 필터링
+const isMultiFilter = ({ selectedSpace, priceFilter }) => {
+  return selectedSpace.length !== 0 && priceFilter.length !== 0;
+};
+
+// 아무 필터링도 설정하지 않고 적용버튼 눌렀을때
+const isNotFilter = ({ selectedSpace, priceFilter }) => {
+  return selectedSpace.length === 0 && priceFilter.length === 0;
+};
+
 function renderFilterIcon(flag) {
   if (!flag) {
     return <Icon boxSize={6} as={MdFilterAlt} cursor='pointer' />;
@@ -33,14 +53,14 @@ function Filter() {
   const [priceFilter, setPriceFilter] = useState([]);
 
   const submitFilter = useCallback(() => {
-    if (selectedSpace.length === 0 && priceFilter.length !== 0)
+    if (isPriceFilter({ selectedSpace, priceFilter }))
       priceFilterProduct(priceFilter);
-    else if (selectedSpace.length !== 0 && priceFilter.length === 0)
+    else if (isSpaceFilter({ selectedSpace, priceFilter }))
       spaceFilterProduct(selectedSpace);
-    else if (selectedSpace.length !== 0 && priceFilter.length !== 0) {
+    else if (isMultiFilter({ selectedSpace, priceFilter }))
       allFilterProduct({ selectedSpace, priceFilter });
-    }
-    if (selectedSpace.length === 0 && priceFilter.length === 0) {
+
+    if (isNotFilter({ selectedSpace, priceFilter })) {
       resetFilterProduct();
       setFlag.off();
     } else setFlag.on();
