@@ -17,16 +17,17 @@ export default function Mainpage() {
       }
     });
   }, []);
-  const productList = useSelector(state => state.product.productList);
 
-  // const [productList, setProductList] = useState([]);
+  const productListToShow = useSelector(
+    state => state.product.productListToShow
+  );
 
   return (
     <Box margin='50px auto' width='900px'>
       <Button onClick={onOpen}>Filter</Button>
       <ShowFilter isOpen={isOpen} onClose={onClose} />
       <Box display='flex' flexWrap='wrap'>
-        {productList.map(item => {
+        {productListToShow.map(item => {
           return <ShowProduct productData={item} key={item.idx} />;
         })}
       </Box>
