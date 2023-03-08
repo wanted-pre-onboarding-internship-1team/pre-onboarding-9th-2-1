@@ -1,3 +1,4 @@
+import { useFilterActionContext } from '../../contexts/FilterProductContext';
 import FilterBox from './FilterBox';
 import FilterEventButton from './FilterEventButton';
 import {
@@ -9,10 +10,8 @@ import {
   PopoverBody,
   Box,
   PopoverFooter,
-  Button,
-  Flex,
 } from '@chakra-ui/react';
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import { MdFilterAlt, MdFilterAltOff } from 'react-icons/md';
 
 function renderFilterIcon(flag) {
@@ -23,7 +22,12 @@ function renderFilterIcon(flag) {
 }
 
 function Filter() {
+  const { spaceFilter } = useFilterActionContext();
   const [flag, setFlag] = useBoolean();
+  const [selectedSpace, setSelectedSpace] = useState([]);
+  const submitFilter = useCallback(() => {
+    spaceFilter(selectedSpace);
+  }, [selectedSpace, spaceFilter]);
   return (
     <Box position='relative' float='right'>
       <Popover position='relative'>
@@ -32,10 +36,17 @@ function Filter() {
             <PopoverTrigger>{renderFilterIcon(flag)}</PopoverTrigger>
             <PopoverContent w='100%' mt='10'>
               <PopoverBody>
-                <FilterBox />
+                <FilterBox
+                  selectedSpace={selectedSpace}
+                  setSelectedSpace={setSelectedSpace}
+                />
               </PopoverBody>
               <PopoverFooter>
-                <FilterEventButton onClose={onClose} setFlag={setFlag} />
+                <FilterEventButton
+                  onSubmit={submitFilter}
+                  onClose={onClose}
+                  setFlag={setFlag}
+                />
               </PopoverFooter>
             </PopoverContent>
           </>

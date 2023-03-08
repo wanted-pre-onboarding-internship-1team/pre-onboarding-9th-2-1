@@ -1,9 +1,13 @@
 import SpaceFilter from './SpaceFilter';
-import { VStack, Divider, Popover } from '@chakra-ui/react';
 import React from 'react';
 
-function FilterBox() {
-  return <SpaceFilter />;
+function FilterBox({ selectedSpace, setSelectedSpace }) {
+  return (
+    <SpaceFilter
+      selectedSpace={selectedSpace}
+      setSelectedSpace={setSelectedSpace}
+    />
+  );
 }
 
 export default FilterBox;

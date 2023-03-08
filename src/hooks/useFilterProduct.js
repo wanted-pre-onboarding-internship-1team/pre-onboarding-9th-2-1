@@ -1,11 +1,19 @@
 import { useReducer, useCallback } from 'react';
 
 const filterProductReducer = (state, action) => {
+  const originProductList = JSON.parse(
+    localStorage.getItem('originProductList')
+  );
   switch (action.type) {
     case 'SET':
       return action.filterProduct;
     case 'RESET':
-      return JSON.parse(localStorage.getItem('originProductList'));
+      return originProductList;
+    case 'SPACE_FILTER':
+      const { payload } = action;
+      return originProductList.filter(item =>
+        payload.includes(item.spaceCategory)
+      );
     default:
       throw Error(`${action.type} : 알 수 없는 액션 타입입니다.`);
   }
@@ -31,5 +39,10 @@ export const useFilterProduct = initialState => {
     dispatch({ type: 'RESET' });
   }, []);
 
-  return [filterProduct, { setFilterProduct, resetFilterProduct }];
+  // 공간 카테고리에 따라 필터링하는 함수
+  const spaceFilter = useCallback(spaceCategorys => {
+    dispatch({ type: 'SPACE_FILTER', payload: spaceCategorys });
+  }, []);
+
+  return [filterProduct, { setFilterProduct, resetFilterProduct, spaceFilter }];
 };
