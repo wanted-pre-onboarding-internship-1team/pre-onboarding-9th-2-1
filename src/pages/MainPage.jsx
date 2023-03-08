@@ -1,10 +1,19 @@
-import { Container } from '@chakra-ui/react';
+import Header from '../components/common/Header';
+import { Container, Icon } from '@chakra-ui/react';
 import React from 'react';
+import { BsCart2 } from 'react-icons/bs';
+import { Link } from 'react-router-dom';
 
 export default function MainPage() {
+  const rightComp = () => (
+    <Link to='/reservations'>
+      <Icon as={BsCart2} boxSize='6' />
+    </Link>
+  );
+
   return (
     <Container maxW='container.sm' backgroundColor='white'>
-      main
+      <Header rightComp={rightComp()} />
     </Container>
   );
 }
