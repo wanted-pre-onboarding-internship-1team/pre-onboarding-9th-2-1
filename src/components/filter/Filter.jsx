@@ -22,12 +22,17 @@ function renderFilterIcon(flag) {
 }
 
 function Filter() {
-  const { spaceFilter } = useFilterActionContext();
+  const { spaceFilter, resetFilterProduct } = useFilterActionContext();
   const [flag, setFlag] = useBoolean();
   const [selectedSpace, setSelectedSpace] = useState([]);
   const submitFilter = useCallback(() => {
     spaceFilter(selectedSpace);
   }, [selectedSpace, spaceFilter]);
+
+  const resetHandler = useCallback(() => {
+    resetFilterProduct();
+    setSelectedSpace([]);
+  }, [resetFilterProduct]);
   return (
     <Box position='relative' float='right'>
       <Popover position='relative'>
@@ -46,6 +51,7 @@ function Filter() {
                   onSubmit={submitFilter}
                   onClose={onClose}
                   setFlag={setFlag}
+                  onReset={resetHandler}
                 />
               </PopoverFooter>
             </PopoverContent>
