@@ -4,6 +4,8 @@ const filterProductReducer = (state, action) => {
   switch (action.type) {
     case 'SET':
       return action.filterProduct;
+    case 'RESET':
+      return JSON.parse(localStorage.getItem('originProductList'));
     default:
       throw Error(`${action.type} : 알 수 없는 액션 타입입니다.`);
   }
@@ -24,5 +26,10 @@ export const useFilterProduct = initialState => {
     dispatch({ type: 'SET', filterProduct });
   }, []);
 
-  return [filterProduct, { setFilterProduct }];
+  // 필터된 상품리스트를 초기화하는 함수
+  const resetFilterProduct = useCallback(() => {
+    dispatch({ type: 'RESET' });
+  }, []);
+
+  return [filterProduct, { setFilterProduct, resetFilterProduct }];
 };

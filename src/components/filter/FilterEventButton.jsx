@@ -1,7 +1,9 @@
+import { useFilterActionContext } from '../../contexts/FilterProductContext';
 import { Flex, Button } from '@chakra-ui/react';
 import React from 'react';
 
 function FilterEventButton({ onClose, setFlag }) {
+  const { resetFilterProduct } = useFilterActionContext();
   return (
     <Flex justifyContent='space-around'>
       <Button
@@ -17,6 +19,7 @@ function FilterEventButton({ onClose, setFlag }) {
         w='100%'
         colorScheme='red'
         onClick={() => {
+          resetFilterProduct();
           onClose();
           setFlag.off();
         }}>
