@@ -2,8 +2,13 @@ import PriceFilterList from './PriceFilterList';
 import PriceRangeInput from './PriceRangeInput';
 import { VStack } from '@chakra-ui/react';
 
+const isDuplicateRange = (priceFilter, min, max) => {
+  return priceFilter.find(range => range.min === min && range.max === max);
+};
+
 function PriceFilter({ priceFilter, setPriceFilter }) {
   const addPriceFilterHandler = ({ min, max }) => {
+    if (isDuplicateRange(priceFilter, min, max)) return;
     setPriceFilter(prev => [...prev, { min, max }]);
   };
   return (
