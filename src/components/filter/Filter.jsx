@@ -25,6 +25,7 @@ function Filter() {
   const { spaceFilterProduct, resetFilterProduct } = useFilterActionContext();
   const [flag, setFlag] = useBoolean();
   const [selectedSpace, setSelectedSpace] = useState([]);
+  const [priceFilter, setPriceFilter] = useState([]);
   const submitFilter = useCallback(() => {
     spaceFilterProduct(selectedSpace);
     if (selectedSpace.length === 0) {
@@ -49,6 +50,8 @@ function Filter() {
                 <FilterBox
                   selectedSpace={selectedSpace}
                   setSelectedSpace={setSelectedSpace}
+                  priceFilter={priceFilter}
+                  setPriceFilter={setPriceFilter}
                 />
               </PopoverBody>
               <PopoverFooter>
