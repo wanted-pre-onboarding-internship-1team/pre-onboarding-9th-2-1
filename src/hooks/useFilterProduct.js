@@ -29,6 +29,8 @@ export default function useFilterProduct() {
 
   const onReset = () => {
     setFilteredList([...originList]);
+    setSlideValue([InitializeMin, InitializeMax]);
+    setArea('');
   };
 
   useEffect(() => {
