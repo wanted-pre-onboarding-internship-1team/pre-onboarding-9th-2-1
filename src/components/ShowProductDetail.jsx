@@ -36,7 +36,7 @@ const ShowProductDetail = props => {
             </CardHeader>
           </Card>
         </ModalHeader>
-        <ModalCloseButton />
+
         <ModalBody>
           <Card>
             <CardBody>

@@ -1,11 +1,13 @@
+import ShowFilter from '../components/ShowFilter';
 import ShowProduct from '../components/ShowProduct';
 import { fetchProductList } from '../store/productSlice';
-import { Box, Button } from '@chakra-ui/react';
+import { Box, Button, useDisclosure } from '@chakra-ui/react';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 export default function Mainpage() {
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -21,7 +23,8 @@ export default function Mainpage() {
 
   return (
     <Box margin='50px auto' width='900px'>
-      <Button>Filter</Button>
+      <Button onClick={onOpen}>Filter</Button>
+      <ShowFilter isOpen={isOpen} onClose={onClose} />
       <Box display='flex' flexWrap='wrap'>
         {productList.map(item => {
           return <ShowProduct productData={item} key={item.idx} />;
