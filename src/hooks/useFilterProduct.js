@@ -5,15 +5,19 @@ const filterProductReducer = (state, action) => {
     localStorage.getItem('originProductList')
   );
   const { payload } = action;
+
   switch (action.type) {
     case 'SET':
       return action.filterProduct;
+
     case 'RESET':
       return originProductList;
+
     case 'SPACE_FILTER':
       return originProductList.filter(item =>
         payload.includes(item.spaceCategory)
       );
+
     case 'PRICE_FILTER':
       const newProductList = [];
       originProductList.forEach(item => {
@@ -23,7 +27,10 @@ const filterProductReducer = (state, action) => {
           }
         });
       });
+
+      // 중복되는 구간이 있을 수 있으므로 Set으로 중복제거
       return [...new Set(newProductList)];
+
     case 'ALL_FILTER':
       const andFilterProductList = [];
       const { selectedSpace, priceFilter } = payload;
