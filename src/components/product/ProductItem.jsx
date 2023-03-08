@@ -1,15 +1,16 @@
 import { useProductActionContext } from './../../contexts/ProductContext';
+import LazyImage from './../common/LazyImage';
 import ProductDetail from './ProductDetail';
 import {
   Card,
   CardBody,
   CardFooter,
-  Image,
   Stack,
   Text,
   IconButton,
   Tag,
   useDisclosure,
+  AspectRatio,
 } from '@chakra-ui/react';
 import React from 'react';
 import { RiShoppingBag2Fill } from 'react-icons/ri';
@@ -33,14 +34,9 @@ const ProductItem = ({ product }) => {
         overflow='hidden'
         variant='outline'
         cursor='pointer'>
-        <Image
-          objectFit='cover'
-          ratio={1}
-          maxW={{ base: '100%', sm: '200px' }}
-          borderRadius='lg'
-          src={mainImage}
-          alt={name}
-        />
+        <AspectRatio width={{ base: '100%', sm: '200px' }} ratio={1}>
+          <LazyImage src={mainImage} alt={name} width='100%' />
+        </AspectRatio>
 
         <Stack flex='1'>
           <CardBody position='relative'>
