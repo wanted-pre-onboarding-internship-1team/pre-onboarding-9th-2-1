@@ -1,3 +1,4 @@
+import { useProductActionContext } from './../../contexts/ProductContext';
 import ProductDetail from './ProductDetail';
 import {
   Card,
@@ -15,7 +16,14 @@ import { RiShoppingBag2Fill } from 'react-icons/ri';
 
 const ProductItem = ({ product }) => {
   const { idx, name, mainImage, price, spaceCategory } = product;
+
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { addProduct } = useProductActionContext();
+
+  const onClickHandler = e => {
+    e.stopPropagation();
+    addProduct(product);
+  };
 
   return (
     <>
@@ -55,7 +63,11 @@ const ProductItem = ({ product }) => {
           </CardBody>
 
           <CardFooter justifyContent='flex-end'>
-            <IconButton aria-label='예약하기' icon={<RiShoppingBag2Fill />} />
+            <IconButton
+              onClick={onClickHandler}
+              aria-label='예약하기'
+              icon={<RiShoppingBag2Fill />}
+            />
           </CardFooter>
         </Stack>
       </Card>

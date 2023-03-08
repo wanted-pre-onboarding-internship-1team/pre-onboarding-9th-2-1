@@ -1,3 +1,4 @@
+import { useProductActionContext } from './../../contexts/ProductContext';
 import {
   Image,
   Modal,
@@ -30,6 +31,12 @@ const ProductDetail = ({ isOpen, onClose, product }) => {
     description,
     registrationDate,
   } = product;
+  const { addProduct } = useProductActionContext();
+
+  const onClickHandler = e => {
+    e.stopPropagation();
+    addProduct(product);
+  };
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} isCentered>
@@ -73,6 +80,7 @@ const ProductDetail = ({ isOpen, onClose, product }) => {
             {registrationDate}
           </Text>
           <IconButton
+            onClick={onClickHandler}
             aria-label='장바구니에 넣기'
             icon={<RiShoppingBag2Fill />}
           />
