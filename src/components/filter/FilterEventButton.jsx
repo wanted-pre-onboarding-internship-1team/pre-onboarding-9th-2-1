@@ -1,4 +1,3 @@
-import { useFilterActionContext } from '../../contexts/FilterProductContext';
 import { Flex, Button } from '@chakra-ui/react';
 import React from 'react';
 
@@ -11,7 +10,6 @@ function FilterEventButton({ onClose, setFlag, onSubmit, onReset }) {
         onClick={() => {
           onSubmit();
           onClose();
-          setFlag.on();
         }}>
         적용
       </Button>

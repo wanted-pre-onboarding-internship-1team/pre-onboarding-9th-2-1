@@ -27,7 +27,12 @@ function Filter() {
   const [selectedSpace, setSelectedSpace] = useState([]);
   const submitFilter = useCallback(() => {
     spaceFilterProduct(selectedSpace);
-  }, [selectedSpace, spaceFilterProduct]);
+    if (selectedSpace.length === 0) {
+      setFlag.off();
+      return;
+    }
+    setFlag.on();
+  }, [selectedSpace, setFlag, spaceFilterProduct]);
 
   const resetHandler = useCallback(() => {
     resetFilterProduct();
