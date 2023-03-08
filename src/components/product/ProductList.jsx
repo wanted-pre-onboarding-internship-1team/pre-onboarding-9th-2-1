@@ -1,15 +1,19 @@
+import {
+  useFilterValueContext,
+  useFilterActionContext,
+} from '../../contexts/FilterProductContext';
 import Filter from '../filter/Filter';
 import { getProduct } from './../../apis/api';
 import ProductItem from './ProductItem';
 import { Divider, VStack } from '@chakra-ui/react';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 
 const ProductList = () => {
-  const [productList, setProductList] = useState([]);
-
+  const filterProduct = useFilterValueContext();
+  const { setFilterProduct } = useFilterActionContext();
   useEffect(() => {
-    getProduct().then(({ data }) => setProductList(data));
-  }, []);
+    getProduct().then(({ data }) => setFilterProduct(data));
+  }, [setFilterProduct]);
 
   return (
     <VStack
@@ -18,8 +22,8 @@ const ProductList = () => {
       align='stretch'
       p={5}>
       <Filter />
-      {productList &&
-        productList.map(product => (
+      {filterProduct &&
+        filterProduct.map(product => (
           <ProductItem key={product.idx} product={product} />
         ))}
     </VStack>

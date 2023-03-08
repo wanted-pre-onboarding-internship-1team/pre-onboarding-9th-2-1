@@ -1,3 +1,4 @@
+import { FilterProductProvider } from './contexts/FilterProductContext';
 import { ProductProvider } from './contexts/ProductContext';
 import Router from './router/Router';
 import { radioTheme } from './style/customTheme';
@@ -10,9 +11,11 @@ export const theme = extendTheme({
 function App() {
   return (
     <ChakraProvider theme={theme}>
-      <ProductProvider>
-        <Router />
-      </ProductProvider>
+      <FilterProductProvider>
+        <ProductProvider>
+          <Router />
+        </ProductProvider>
+      </FilterProductProvider>
     </ChakraProvider>
   );
 }
