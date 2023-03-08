@@ -1,10 +1,8 @@
 import {
   NumberInput,
   NumberInputField,
-  NumberInputStepper,
-  NumberDecrementStepper,
-  NumberIncrementStepper,
-  Input,
+  CheckboxGroup,
+  Checkbox,
   Button,
   Modal,
   ModalBody,
@@ -18,12 +16,12 @@ import {
   RangeSliderFilledTrack,
   RangeSliderThumb,
   Box,
-  Badge,
 } from '@chakra-ui/react';
 import React, { useState } from 'react';
 
 const ProductFilter = ({ isOpen, onClose, setCondition }) => {
   const [range, setRange] = useState({ min: 0, max: 50000 });
+  const [category, setCategory] = useState([]);
   const step = 500;
 
   const handleSubmit = e => {
@@ -32,7 +30,18 @@ const ProductFilter = ({ isOpen, onClose, setCondition }) => {
       setRange({ min: 0, max: 50000 });
       return;
     }
+    setCondition({ min: range.min, max: range.max, categories: category });
+    setCategory([]);
     onClose();
+  };
+
+  const handleCheck = e => {
+    const { value, checked } = e.target;
+    if (checked) {
+      setCategory(category.concat(value));
+    } else {
+      setCategory(category.filter(category => value !== category));
+    }
   };
 
   return (
@@ -47,7 +56,6 @@ const ProductFilter = ({ isOpen, onClose, setCondition }) => {
         <ModalHeader>필터</ModalHeader>
         <ModalBody>
           <RangeSlider
-            aria-label={['min', 'max']}
             value={[range.min / step, range.max / step]}
             onChange={value => {
               setRange({
@@ -105,6 +113,16 @@ const ProductFilter = ({ isOpen, onClose, setCondition }) => {
               <NumberInputField />
             </NumberInput>
           </Box>
+
+          <CheckboxGroup spacing='1rem' margin='1rem'>
+            {['서울', '부산'].map((location, index) => {
+              return (
+                <Checkbox key={index} value={location} onChange={handleCheck}>
+                  {location}
+                </Checkbox>
+              );
+            })}
+          </CheckboxGroup>
         </ModalBody>
 
         <ModalFooter justifyContent='right'>
