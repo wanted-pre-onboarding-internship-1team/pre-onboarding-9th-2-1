@@ -15,7 +15,7 @@ const Backdrop = ({ onClose }) => {
       zIndex='999'
       display='flex'
       justifyContent='center'
-      alignItem='center'
+      alignItems='center'
       onClick={onClose}
     />
   );
