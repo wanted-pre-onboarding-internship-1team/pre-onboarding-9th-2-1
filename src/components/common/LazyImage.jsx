@@ -26,16 +26,11 @@ function LazyImage(props) {
     });
     skeletonRef.current && observer.observe(skeletonRef.current);
   }, [intersectionObserverCallback]);
-  return (
-    // eslint-disable-next-line react/jsx-no-useless-fragment
-    <React.Fragment>
-      {isShown ? (
-        <Image {...props} />
-      ) : (
-        <Skeleton ref={skeletonRef} width={props?.width} />
-      )}
-    </React.Fragment>
-  );
+
+  if (isShown) {
+    return <Image {...props} />;
+  }
+  return <Skeleton ref={skeletonRef} width={props?.width} />;
 }
 
 export default LazyImage;
