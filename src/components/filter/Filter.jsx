@@ -22,12 +22,12 @@ function renderFilterIcon(flag) {
 }
 
 function Filter() {
-  const { spaceFilter, resetFilterProduct } = useFilterActionContext();
+  const { spaceFilterProduct, resetFilterProduct } = useFilterActionContext();
   const [flag, setFlag] = useBoolean();
   const [selectedSpace, setSelectedSpace] = useState([]);
   const submitFilter = useCallback(() => {
-    spaceFilter(selectedSpace);
-  }, [selectedSpace, spaceFilter]);
+    spaceFilterProduct(selectedSpace);
+  }, [selectedSpace, spaceFilterProduct]);
 
   const resetHandler = useCallback(() => {
     resetFilterProduct();

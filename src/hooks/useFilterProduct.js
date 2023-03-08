@@ -40,9 +40,12 @@ export const useFilterProduct = initialState => {
   }, []);
 
   // 공간 카테고리에 따라 필터링하는 함수
-  const spaceFilter = useCallback(spaceCategorys => {
+  const spaceFilterProduct = useCallback(spaceCategorys => {
     dispatch({ type: 'SPACE_FILTER', payload: spaceCategorys });
   }, []);
 
-  return [filterProduct, { setFilterProduct, resetFilterProduct, spaceFilter }];
+  return [
+    filterProduct,
+    { setFilterProduct, resetFilterProduct, spaceFilterProduct },
+  ];
 };
