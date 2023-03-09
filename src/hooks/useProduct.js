@@ -41,8 +41,8 @@ const productReducer = (products, action) => {
   }
 };
 
-export const useProduct = () => {
-  const [response, dispatch] = useReducer(productReducer, []);
+export const useProduct = initialState => {
+  const [response, dispatch] = useReducer(productReducer, initialState);
 
   const addProduct = newProduct => {
     dispatch({ type: 'ADD', newProduct });

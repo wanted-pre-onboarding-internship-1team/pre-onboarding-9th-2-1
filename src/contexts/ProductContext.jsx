@@ -1,3 +1,4 @@
+import { getLocalStorage } from '../util/getLocalStorage';
 import { useProduct } from './../hooks/useProduct';
 import { createContext, useContext } from 'react';
 
@@ -5,7 +6,9 @@ const ProductValueContext = createContext();
 const ProductActionContext = createContext();
 
 export const ProductProvider = ({ children }) => {
-  const [addedList, { addProduct, deleteProduct }] = useProduct([]);
+  const [addedList, { addProduct, deleteProduct }] = useProduct(
+    getLocalStorage('products', [])
+  );
 
   return (
     <ProductValueContext.Provider value={addedList}>
