@@ -11,7 +11,10 @@ const productReducer = (products, action) => {
       let newProductList = [];
       if (filteredList.length > 0) {
         newProductList = products.map(product => {
-          if (product.idx === newProduct.idx) {
+          if (
+            product.idx === newProduct.idx &&
+            product.count < product.maximumPurchases
+          ) {
             product.count++;
           }
           return product;
