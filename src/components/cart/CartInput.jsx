@@ -5,6 +5,7 @@ import {
   NumberInput,
   NumberInputField,
   NumberInputStepper,
+  useToast,
 } from '@chakra-ui/react';
 import React from 'react';
 
@@ -13,13 +14,36 @@ const CartInput = ({ product }) => {
 
   const { setProduct } = useProductActionContext();
 
-  const onClickHandler = e => {
+  const toast = useToast();
+
+  const onChangeHandler = e => {
+    if (maximumPurchases < e) {
+      toast({
+        title: `최대 예약 가능 수량은 ${maximumPurchases}개입니다.`,
+        status: 'error',
+        variant: 'subtle',
+        isClosable: true,
+      });
+
+      setProduct(product, maximumPurchases);
+      return;
+    }
+
+    if (1 > e) {
+      toast({
+        title: `1 개 이상의 상품을 선택해 주세요.`,
+        status: 'error',
+        variant: 'subtle',
+        isClosable: true,
+      });
+    }
+
     setProduct(product, +e);
   };
 
   return (
     <NumberInput
-      onChange={onClickHandler}
+      onChange={onChangeHandler}
       value={quantity}
       max={maximumPurchases}
       min={1}

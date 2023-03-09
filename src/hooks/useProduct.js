@@ -13,6 +13,9 @@ const productReducer = (products, action) => {
       let newProductList;
 
       if (isDuplicate) {
+        if (isDuplicate.quantity + quantity > isDuplicate.maximumPurchases)
+          return products;
+
         newProductList = products.map(product =>
           product.idx === newProduct.idx
             ? { ...product, quantity: product.quantity + quantity }
@@ -26,6 +29,8 @@ const productReducer = (products, action) => {
 
       return newProductList;
     case 'SET':
+      if (quantity > newProduct.maximumPurchases) return products;
+
       const productList = products.map(product =>
         product.idx === newProduct.idx ? { ...product, quantity } : product
       );

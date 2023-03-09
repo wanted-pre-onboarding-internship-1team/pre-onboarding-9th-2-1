@@ -1,5 +1,5 @@
-import { useProductActionContext } from './../../contexts/ProductContext';
 import LazyImage from './../common/LazyImage';
+import ProductBtn from './ProductBtn';
 import ProductDetail from './ProductDetail';
 import {
   Card,
@@ -7,24 +7,16 @@ import {
   CardFooter,
   Stack,
   Text,
-  IconButton,
   Tag,
   useDisclosure,
   AspectRatio,
 } from '@chakra-ui/react';
 import React from 'react';
-import { RiShoppingBag2Fill } from 'react-icons/ri';
 
 const ProductItem = ({ product }) => {
   const { idx, name, mainImage, price, spaceCategory } = product;
 
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { addProduct } = useProductActionContext();
-
-  const onClickHandler = e => {
-    e.stopPropagation();
-    addProduct(product);
-  };
 
   return (
     <>
@@ -59,11 +51,7 @@ const ProductItem = ({ product }) => {
           </CardBody>
 
           <CardFooter justifyContent='flex-end'>
-            <IconButton
-              onClick={onClickHandler}
-              aria-label='예약하기'
-              icon={<RiShoppingBag2Fill />}
-            />
+            <ProductBtn product={product} />
           </CardFooter>
         </Stack>
       </Card>

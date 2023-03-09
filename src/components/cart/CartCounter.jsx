@@ -8,8 +8,8 @@ const CartCounter = () => {
   const addedList = useProductValueContext();
 
   const totalPrice = () => {
-    const total = addedList.reduce((ac, cr) => ac + cr.price * cr.quantity, 0);
-    return total.toLocaleString();
+    const total = addedList?.reduce((ac, cr) => ac + cr.price * cr.quantity, 0);
+    return total ? total.toLocaleString() : 0;
   };
 
   return (

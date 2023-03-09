@@ -1,4 +1,4 @@
-import { useProductActionContext } from './../../contexts/ProductContext';
+import ProductBtn from './ProductBtn';
 import {
   Image,
   Modal,
@@ -14,12 +14,10 @@ import {
   Td,
   Th,
   Tr,
-  IconButton,
   Text,
   AspectRatio,
 } from '@chakra-ui/react';
 import React from 'react';
-import { RiShoppingBag2Fill } from 'react-icons/ri';
 
 const ProductDetail = ({ isOpen, onClose, product }) => {
   const {
@@ -31,11 +29,6 @@ const ProductDetail = ({ isOpen, onClose, product }) => {
     description,
     registrationDate,
   } = product;
-  const { addProduct } = useProductActionContext();
-
-  const onClickHandler = () => {
-    addProduct(product);
-  };
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} isCentered>
@@ -82,11 +75,7 @@ const ProductDetail = ({ isOpen, onClose, product }) => {
           <Text color='blackAlpha.600' fontSize='sm'>
             {registrationDate}
           </Text>
-          <IconButton
-            onClick={onClickHandler}
-            aria-label='장바구니에 넣기'
-            icon={<RiShoppingBag2Fill />}
-          />
+          <ProductBtn product={product} />
         </ModalFooter>
       </ModalContent>
     </Modal>
