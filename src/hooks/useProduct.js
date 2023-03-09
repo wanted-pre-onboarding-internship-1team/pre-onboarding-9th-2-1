@@ -1,18 +1,40 @@
+import { getLocalStorage } from '../util/getLocalStorage';
 import { useReducer } from 'react';
 
 const productReducer = (products, action) => {
-  const { newProduct, targetProduct } = action;
+  const { newProduct, idx, quantity } = action;
 
   switch (action.type) {
     case 'ADD':
-      const newProductList = [...products, newProduct];
+      const isDuplicate = products.find(
+        product => product.idx === newProduct.idx
+      );
+
+      let newProductList;
+
+      if (isDuplicate) {
+        newProductList = products.map(product =>
+          product.idx === newProduct.idx
+            ? { ...product, quantity: product.quantity + quantity }
+            : product
+        );
+      } else {
+        newProductList = [...products, { ...newProduct, quantity: 1 }];
+      }
+
       localStorage.setItem('products', JSON.stringify(newProductList));
 
       return newProductList;
-    case 'DELETE':
-      const deletedList = products.filter(
-        item => item.idx !== targetProduct.idx
+    case 'SET':
+      const productList = products.map(product =>
+        product.idx === newProduct.idx ? { ...product, quantity } : product
       );
+
+      localStorage.setItem('products', JSON.stringify(productList));
+      return productList;
+    case 'DELETE':
+      const deletedList = products.filter(product => product.idx !== idx);
+
       localStorage.setItem('products', JSON.stringify(deletedList));
 
       return deletedList;
@@ -22,15 +44,20 @@ const productReducer = (products, action) => {
 };
 
 export const useProduct = () => {
-  const [response, dispatch] = useReducer(productReducer, []);
+  const initialState = getLocalStorage('products', []);
+  const [response, dispatch] = useReducer(productReducer, initialState);
 
-  const addProduct = newProduct => {
-    dispatch({ type: 'ADD', newProduct });
+  const addProduct = (newProduct, quantity = 1) => {
+    dispatch({ type: 'ADD', newProduct, quantity });
   };
 
-  const deleteProduct = targetProduct => {
-    dispatch({ type: 'DELETE', targetProduct });
+  const setProduct = (newProduct, quantity) => {
+    dispatch({ type: 'SET', newProduct, quantity });
   };
 
-  return [response, { addProduct, deleteProduct }];
+  const deleteProduct = idx => {
+    dispatch({ type: 'DELETE', idx });
+  };
+
+  return [response, { addProduct, setProduct, deleteProduct }];
 };

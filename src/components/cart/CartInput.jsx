@@ -1,3 +1,4 @@
+import { useProductActionContext } from './../../contexts/ProductContext';
 import {
   NumberDecrementStepper,
   NumberIncrementStepper,
@@ -5,20 +6,22 @@ import {
   NumberInputField,
   NumberInputStepper,
 } from '@chakra-ui/react';
-import React, { useState } from 'react';
+import React from 'react';
 
-const CartInput = () => {
-  const [quantity, setQuantity] = useState(1);
+const CartInput = ({ product }) => {
+  const { quantity, maximumPurchases } = product;
+
+  const { setProduct } = useProductActionContext();
 
   const onClickHandler = e => {
-    setQuantity(e);
+    setProduct(product, +e);
   };
 
   return (
     <NumberInput
       onChange={onClickHandler}
       value={quantity}
-      max={30}
+      max={maximumPurchases}
       min={1}
       clampValueOnBlur={false}>
       <NumberInputField />

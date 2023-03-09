@@ -1,3 +1,4 @@
+import { useProductActionContext } from './../../contexts/ProductContext';
 import LazyImage from './../common/LazyImage';
 import CartInput from './CartInput';
 import { Text } from '@chakra-ui/layout';
@@ -15,6 +16,12 @@ import { SlClose } from 'react-icons/sl';
 const CartItem = ({ product }) => {
   const { idx, name, mainImage, price } = product;
 
+  const { deleteProduct } = useProductActionContext();
+
+  const onClickHandler = () => {
+    deleteProduct(idx);
+  };
+
   return (
     <Card direction='row' overflow='hidden' variant='unstyled'>
       <AspectRatio width='100px' ratio={1}>
@@ -24,6 +31,7 @@ const CartItem = ({ product }) => {
       <Stack flex='1'>
         <CardBody position='relative' py='2' px='4'>
           <IconButton
+            onClick={onClickHandler}
             decoration='underline'
             position='absolute'
             top={0}
@@ -42,7 +50,7 @@ const CartItem = ({ product }) => {
           </Text>
 
           <CardFooter>
-            <CartInput idx={idx} />
+            <CartInput product={product} />
           </CardFooter>
         </CardBody>
       </Stack>
