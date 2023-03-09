@@ -35,6 +35,7 @@ const productReducer = (products, action) => {
         }
         return product;
       });
+      countUpdatedList = countUpdatedList.filter(product => product.count > 0);
       localStorage.setItem('products', JSON.stringify(countUpdatedList));
       return countUpdatedList;
     case 'DELETE':
