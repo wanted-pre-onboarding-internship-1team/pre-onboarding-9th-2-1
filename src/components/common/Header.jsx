@@ -17,10 +17,12 @@ const Header = ({ noBackBtn, rightComp }) => {
       gap={6}
       alignItems='center'
       justifyContent='space-between'
+      width='500px'
+      margin='auto'
       p={3}>
       {noBackBtn && (
         <GridItem area='left'>
-          <Link onClick={onClickHandler} display>
+          <Link onClick={onClickHandler}>
             <Icon as={BsChevronLeft} boxSize='6' />
           </Link>
         </GridItem>
