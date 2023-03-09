@@ -16,8 +16,10 @@ const cartSlice = createSlice({
     deleteCartItem(state, action) {
       let newState = state.cartList.slice();
       const idx = action.payload;
-      newState.splice(idx, 1);
-      return newState;
+      const result = newState.filter(item => {
+        return item.idx !== idx;
+      });
+      state.cartList = result;
     },
 
     increaseQty(state, action) {
