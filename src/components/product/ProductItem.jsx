@@ -11,19 +11,42 @@ import {
   Tag,
   useDisclosure,
   AspectRatio,
+  Button,
 } from '@chakra-ui/react';
-import React from 'react';
+import React, { useState } from 'react';
 import { RiShoppingBag2Fill } from 'react-icons/ri';
 
-const ProductItem = ({ product }) => {
-  const { idx, name, mainImage, price, spaceCategory } = product;
+const ProductItem = ({ product, setShowAlert }) => {
+  const { idx, name, mainImage, price, spaceCategory, maximumPurchases } =
+    product;
+
+  const [quantityNum, setQuantityNum] = useState(1);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
+
   const { addProduct } = useProductActionContext();
 
   const onClickHandler = e => {
     e.stopPropagation();
+    product.quantity = quantityNum;
     addProduct(product);
+  };
+
+  const quantityMinus = e => {
+    e.stopPropagation();
+    if (quantityNum === 1) return;
+    setQuantityNum(prev => prev - 1);
+    setShowAlert(false);
+  };
+
+  const quantityPlus = e => {
+    e.stopPropagation();
+    if (quantityNum === maximumPurchases) {
+      setShowAlert(true);
+      return;
+    }
+    setQuantityNum(prev => prev + 1);
+    setShowAlert(false);
   };
 
   return (
@@ -58,8 +81,31 @@ const ProductItem = ({ product }) => {
             <Tag>{spaceCategory}</Tag>
           </CardBody>
 
-          <CardFooter justifyContent='flex-end'>
+          <CardFooter alignItems='center' justifyContent='flex-end'>
+            <Stack direction='row' spacing={2} align='center'>
+              <Button
+                backgroundColor='transparent'
+                border='1px'
+                size='xs'
+                ml={1}
+                fontSize='md'
+                onClick={quantityMinus}>
+                -
+              </Button>
+              <Text fontSize='md' display='inline-block'>
+                {quantityNum}
+              </Text>
+              <Button
+                backgroundColor='transparent'
+                border='1px'
+                size='xs'
+                fontSize='md'
+                onClick={quantityPlus}>
+                +
+              </Button>
+            </Stack>
             <IconButton
+              ml='30px'
               onClick={onClickHandler}
               aria-label='예약하기'
               icon={<RiShoppingBag2Fill />}
@@ -67,7 +113,6 @@ const ProductItem = ({ product }) => {
           </CardFooter>
         </Stack>
       </Card>
-
       <ProductDetail isOpen={isOpen} onClose={onClose} product={product} />
     </>
   );
