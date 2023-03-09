@@ -21,7 +21,7 @@ const ProductItem = ({ product }) => {
   const { idx, name, mainImage, price, spaceCategory, maximumPurchases } =
     product;
 
-  const [quantityNum, setQuantityNum] = useState(1);
+  const [quantity, setQuantity] = useState(1);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
@@ -30,19 +30,25 @@ const ProductItem = ({ product }) => {
 
   const onClickHandler = e => {
     e.stopPropagation();
-    product.quantity = quantityNum;
-    addProduct(product);
+    // const storageList = JSON.parse(localStorage.getItem('products'));
+    // if (storageList && storageList.find(product => product.idx === idx)) {
+    //   storageList.find(product => product.idx === idx).quantity = quantityNum;
+    //   localStorage.setItem('products', JSON.stringify(storageList));
+    // } else {
+    //   product.quantity = quantityNum;
+    // }
+    addProduct(product, quantity);
   };
 
   const quantityMinus = e => {
     e.stopPropagation();
-    if (quantityNum === 1) return;
-    setQuantityNum(prev => prev - 1);
+    if (quantity === 1) return;
+    setQuantity(prev => prev - 1);
   };
 
   const quantityPlus = e => {
     e.stopPropagation();
-    if (quantityNum === maximumPurchases) {
+    if (quantity === maximumPurchases) {
       toast({
         title: '최대 구매 가능한 수량입니다',
         status: 'error',
@@ -50,7 +56,7 @@ const ProductItem = ({ product }) => {
       });
       return;
     }
-    setQuantityNum(prev => prev + 1);
+    setQuantity(prev => prev + 1);
   };
 
   return (
@@ -97,7 +103,7 @@ const ProductItem = ({ product }) => {
                 -
               </Button>
               <Text fontSize='md' display='inline-block'>
-                {quantityNum}
+                {quantity}
               </Text>
               <Button
                 backgroundColor='transparent'

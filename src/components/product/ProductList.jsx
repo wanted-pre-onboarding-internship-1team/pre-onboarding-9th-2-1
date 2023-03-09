@@ -2,14 +2,7 @@ import { getProduct } from './../../apis/api';
 import { useFilter } from './../../hooks/useFilter';
 import ProductItem from './ProductItem';
 import { Divider, VStack } from '@chakra-ui/react';
-import {
-  Alert,
-  AlertIcon,
-  AlertTitle,
-  AlertDescription,
-  Box,
-} from '@chakra-ui/react';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 const ProductList = ({ filter }) => {
   const productList = useRef([]);

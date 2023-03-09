@@ -1,11 +1,24 @@
 import { useReducer } from 'react';
 
 const productReducer = (products, action) => {
-  const { newProduct, targetProduct } = action;
+  const { newProduct, quantity, targetProduct } = action;
 
   switch (action.type) {
     case 'ADD':
-      const newProductList = [...products, newProduct];
+      let newProductList = [];
+      const existProduct = products.find(
+        product => product.idx === newProduct.idx
+      );
+      if (existProduct) {
+        existProduct.quantity = quantity;
+        const etcProducts = products.filter(
+          product => product.idx !== newProduct.idx
+        );
+        newProductList = [...etcProducts, existProduct];
+      } else {
+        newProduct.quantity = quantity;
+        newProductList = [...products, newProduct];
+      }
       localStorage.setItem('products', JSON.stringify(newProductList));
 
       return newProductList;
@@ -22,10 +35,11 @@ const productReducer = (products, action) => {
 };
 
 export const useProduct = () => {
-  const [response, dispatch] = useReducer(productReducer, []);
+  const storagedList = JSON.parse(localStorage.getItem('products')) ?? [];
+  const [response, dispatch] = useReducer(productReducer, [...storagedList]);
 
-  const addProduct = newProduct => {
-    dispatch({ type: 'ADD', newProduct });
+  const addProduct = (newProduct, quantity) => {
+    dispatch({ type: 'ADD', newProduct, quantity });
   };
 
   const deleteProduct = targetProduct => {
