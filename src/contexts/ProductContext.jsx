@@ -6,13 +6,13 @@ const ProductValueContext = createContext();
 const ProductActionContext = createContext();
 
 export const ProductProvider = ({ children }) => {
-  const [addedList, { addProduct, deleteProduct }] = useProduct(
-    getLocalStorage('products', [])
-  );
+  const [addedList, { addProduct, deleteProduct, editProductCount }] =
+    useProduct(getLocalStorage('products', []));
 
   return (
     <ProductValueContext.Provider value={addedList}>
-      <ProductActionContext.Provider value={{ addProduct, deleteProduct }}>
+      <ProductActionContext.Provider
+        value={{ addProduct, deleteProduct, editProductCount }}>
         {children}
       </ProductActionContext.Provider>
     </ProductValueContext.Provider>

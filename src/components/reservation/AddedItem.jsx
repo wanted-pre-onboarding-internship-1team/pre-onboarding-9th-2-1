@@ -1,7 +1,7 @@
 import LazyImage from '../common/LazyImage';
 import AddedItemContent from './AddedItemContent';
 import { HStack } from '@chakra-ui/layout';
-import { Card } from '@chakra-ui/react';
+import { Card, CardBody } from '@chakra-ui/react';
 import React from 'react';
 
 export default function AddedItemDetail({
@@ -16,13 +16,15 @@ export default function AddedItemDetail({
     <Card w='100%'>
       <HStack spacing={8} align='stretch'>
         <LazyImage src={mainImage} alt={name} />
-        <AddedItemContent
-          idx={idx}
-          name={name}
-          count={count}
-          price={price}
-          maximumPurchases={maximumPurchases}
-        />
+        <CardBody>
+          <AddedItemContent
+            idx={idx}
+            name={name}
+            count={count}
+            price={price}
+            maximumPurchases={maximumPurchases}
+          />
+        </CardBody>
       </HStack>
     </Card>
   );

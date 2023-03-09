@@ -1,7 +1,7 @@
 import { useReducer } from 'react';
 
 const productReducer = (products, action) => {
-  const { newProduct, targetProductIdx } = action;
+  const { newProduct, targetProductIdx, newCount } = action;
 
   switch (action.type) {
     case 'ADD':
@@ -36,6 +36,17 @@ const productReducer = (products, action) => {
       );
       localStorage.setItem('products', JSON.stringify(deletedList));
       return deletedList;
+
+    case 'EDIT_COUNT':
+      console.log(newCount, targetProductIdx);
+      const editedList = products.map(item => {
+        if (item.idx === targetProductIdx) {
+          return { ...item, count: newCount };
+        }
+        return item;
+      });
+      localStorage.setItem('products', JSON.stringify(editedList));
+      return editedList;
     default:
       throw Error(`${action.type} : 알 수 없는 액션 타입입니다.`);
   }
@@ -52,5 +63,9 @@ export const useProduct = initialState => {
     dispatch({ type: 'DELETE', targetProductIdx });
   };
 
-  return [response, { addProduct, deleteProduct }];
+  const editProductCount = ({ targetProductIdx, newCount }) => {
+    dispatch({ type: 'EDIT_COUNT', targetProductIdx, newCount });
+  };
+
+  return [response, { addProduct, deleteProduct, editProductCount }];
 };
