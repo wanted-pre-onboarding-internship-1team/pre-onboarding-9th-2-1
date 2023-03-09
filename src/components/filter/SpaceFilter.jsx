@@ -1,5 +1,6 @@
 import { useFilterContext } from '../../contexts/FilterContext';
-import { HStack, Text, Button } from '@chakra-ui/react';
+import SpaceFilterButton from './SpaceFilterButton';
+import { HStack, Text } from '@chakra-ui/react';
 
 const SpaceFilter = () => {
   const { spaceCategoryFilter } = useFilterContext();
@@ -8,7 +9,7 @@ const SpaceFilter = () => {
     <HStack>
       <Text>지역</Text>
       {spaceCategoryFilter.map(space => {
-        return <Button>{space}</Button>;
+        return <SpaceFilterButton space={space} key={space} />;
       })}
     </HStack>
   );

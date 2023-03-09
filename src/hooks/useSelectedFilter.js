@@ -31,6 +31,9 @@ const useSelectedFilter = () => {
   const deleteSpaceFilter = deleteSpace => {
     dispatch({ type: 'DELETE', deleteSpace });
   };
+  const isSelectedSpace = space => {
+    return selectedSpaceCategoryFilter.has(space);
+  };
 
   return {
     selectedPriceFilter,
@@ -38,6 +41,7 @@ const useSelectedFilter = () => {
     selectedSpaceCategoryFilter,
     addSpaceFilter,
     deleteSpaceFilter,
+    isSelectedSpace,
   };
 };
 

@@ -13,6 +13,7 @@ export const FilterProvider = ({ children }) => {
     selectedSpaceCategoryFilter,
     addSpaceFilter,
     deleteSpaceFilter,
+    isSelectedSpace,
   } = useSelectedFilter();
 
   const filterValue = { priceFilter, spaceCategoryFilter, initFilter };
@@ -22,6 +23,7 @@ export const FilterProvider = ({ children }) => {
     selectedSpaceCategoryFilter,
     addSpaceFilter,
     deleteSpaceFilter,
+    isSelectedSpace,
   };
 
   return (
