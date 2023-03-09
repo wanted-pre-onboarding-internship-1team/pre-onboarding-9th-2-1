@@ -19,7 +19,7 @@ import {
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-const ShowFilter = props => {
+const ViewFilter = props => {
   const dispatch = useDispatch();
   const { isOpen, onClose } = props;
   const spaceList = ['서울', '부산', '대구', '강원', '제주'];
@@ -124,4 +124,4 @@ const ShowFilter = props => {
   );
 };
 
-export default ShowFilter;
+export default ViewFilter;

@@ -1,5 +1,5 @@
-import ShowFilter from '../components/ShowFilter';
-import ShowProduct from '../components/ShowProduct';
+import ViewFilter from '../components/ViewFilter';
+import ViewProduct from '../components/ViewProduct';
 import { fetchProductList } from '../store/productSlice';
 import { Box, Button, useDisclosure } from '@chakra-ui/react';
 import axios from 'axios';
@@ -30,10 +30,10 @@ export default function Mainpage() {
         <NavLink to='/reservations'>장바구니</NavLink>
       </Button>
 
-      <ShowFilter isOpen={isOpen} onClose={onClose} />
+      <ViewFilter isOpen={isOpen} onClose={onClose} />
       <Box display='flex' flexWrap='wrap'>
         {productListToShow.map(item => {
-          return <ShowProduct productData={item} key={item.idx} />;
+          return <ViewProduct productData={item} key={item.idx} />;
         })}
       </Box>
     </Box>

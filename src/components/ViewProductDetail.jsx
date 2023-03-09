@@ -18,7 +18,7 @@ import {
 } from '@chakra-ui/react';
 import React from 'react';
 
-const ShowProductDetail = props => {
+const ViewProductDetail = props => {
   const { productData, isOpen, onClose } = props;
 
   return (
@@ -70,4 +70,4 @@ const ShowProductDetail = props => {
   );
 };
 
-export default ShowProductDetail;
+export default ViewProductDetail;

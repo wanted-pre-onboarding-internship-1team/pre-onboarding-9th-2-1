@@ -1,5 +1,5 @@
 import { addCartItem } from '../store/cartSlice';
-import ShowProductDetail from './ShowProductDetail';
+import ViewProductDetail from './ViewProductDetail';
 import {
   Flex,
   Card,
@@ -18,7 +18,7 @@ import {
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-const ShowProduct = ({ productData }) => {
+const ViewProduct = ({ productData }) => {
   const dispatch = useDispatch();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -26,7 +26,6 @@ const ShowProduct = ({ productData }) => {
   const [isReserved, setIsReserved] = useState(false);
 
   const onReservation = () => {
-    alert('장바구니 담기완료!');
     dispatch(addCartItem(productData));
     setIsReserved(true);
   };
@@ -82,7 +81,7 @@ const ShowProduct = ({ productData }) => {
         </CardFooter>
       </Card>
 
-      <ShowProductDetail
+      <ViewProductDetail
         productData={productData}
         isOpen={isOpen}
         onClose={onClose}
@@ -91,4 +90,4 @@ const ShowProduct = ({ productData }) => {
   );
 };
 
-export default ShowProduct;
+export default ViewProduct;
