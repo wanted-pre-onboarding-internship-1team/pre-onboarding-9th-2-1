@@ -20,7 +20,7 @@ const Header = ({ noBackBtn, rightComp }) => {
       p={3}>
       {noBackBtn && (
         <GridItem area='left'>
-          <Link onClick={onClickHandler} display>
+          <Link onClick={onClickHandler}>
             <Icon as={BsChevronLeft} boxSize='6' />
           </Link>
         </GridItem>
