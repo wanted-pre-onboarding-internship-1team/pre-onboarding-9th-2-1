@@ -1,7 +1,7 @@
 import { useReducer } from 'react';
 
 const productReducer = (products, action) => {
-  const { newProduct, targetProduct } = action;
+  const { newProduct, targetProduct, changedCount } = action;
 
   switch (action.type) {
     case 'ADD':
@@ -25,6 +25,18 @@ const productReducer = (products, action) => {
       }
       localStorage.setItem('products', JSON.stringify(newProductList));
       return newProductList;
+    case 'SET_COUNT':
+      let countUpdatedList = products.map(product => {
+        if (
+          product.idx === targetProduct.idx &&
+          product.count <= product.maximumPurchases
+        ) {
+          product.count = changedCount;
+        }
+        return product;
+      });
+      localStorage.setItem('products', JSON.stringify(countUpdatedList));
+      return countUpdatedList;
     case 'DELETE':
       const deletedList = products.filter(
         item => item.idx !== targetProduct.idx
@@ -50,5 +62,9 @@ export const useProduct = () => {
     dispatch({ type: 'DELETE', targetProduct });
   };
 
-  return [response, { addProduct, deleteProduct }];
+  const updateCount = (targetProduct, changedCount) => {
+    dispatch({ type: 'SET_COUNT', targetProduct, changedCount });
+  };
+
+  return [response, { addProduct, deleteProduct, updateCount }];
 };

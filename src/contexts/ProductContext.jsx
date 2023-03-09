@@ -5,11 +5,14 @@ const ProductValueContext = createContext();
 const ProductActionContext = createContext();
 
 export const ProductProvider = ({ children }) => {
-  const [addedList, { addProduct, deleteProduct }] = useProduct([]);
+  const [addedList, { addProduct, deleteProduct, updateCount }] = useProduct(
+    []
+  );
 
   return (
     <ProductValueContext.Provider value={addedList}>
-      <ProductActionContext.Provider value={{ addProduct, deleteProduct }}>
+      <ProductActionContext.Provider
+        value={{ addProduct, deleteProduct, updateCount }}>
         {children}
       </ProductActionContext.Provider>
     </ProductValueContext.Provider>
