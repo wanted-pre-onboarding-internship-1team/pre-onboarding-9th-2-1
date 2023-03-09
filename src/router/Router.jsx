@@ -8,15 +8,9 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 export default function router() {
-  const rightComp = () => (
-    <Link to='/reservations'>
-      <Icon gridArea='unset' as={BsCart2} boxSize='6' />
-    </Link>
-  );
-
   return (
     <>
-      <Header noBackBtn={true} rightComp={rightComp()} />
+      <Header />
       <Routes>
         <Route path='/' element={<Navigate to='/main' />} />
         <Route path='/main' element={<MainPage />} />

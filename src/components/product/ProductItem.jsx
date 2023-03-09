@@ -30,13 +30,6 @@ const ProductItem = ({ product }) => {
 
   const onClickHandler = e => {
     e.stopPropagation();
-    // const storageList = JSON.parse(localStorage.getItem('products'));
-    // if (storageList && storageList.find(product => product.idx === idx)) {
-    //   storageList.find(product => product.idx === idx).quantity = quantityNum;
-    //   localStorage.setItem('products', JSON.stringify(storageList));
-    // } else {
-    //   product.quantity = quantityNum;
-    // }
     addProduct(product, quantity);
   };
 

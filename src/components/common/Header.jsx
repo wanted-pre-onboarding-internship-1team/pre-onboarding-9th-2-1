@@ -1,14 +1,11 @@
 import { Grid, GridItem, Heading, Icon } from '@chakra-ui/react';
 import React from 'react';
-import { BsChevronLeft } from 'react-icons/bs';
+import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
+import { BsCart2 } from 'react-icons/bs';
 import { Link, useNavigate } from 'react-router-dom';
 
-const Header = ({ noBackBtn, rightComp }) => {
+const Header = () => {
   const navigate = useNavigate();
-
-  const onClickHandler = () => {
-    navigate(-1);
-  };
 
   return (
     <Grid
@@ -20,20 +17,23 @@ const Header = ({ noBackBtn, rightComp }) => {
       width='500px'
       margin='auto'
       p={3}>
-      {noBackBtn && (
-        <GridItem area='left'>
-          <Link onClick={onClickHandler}>
-            <Icon as={BsChevronLeft} boxSize='6' />
-          </Link>
-        </GridItem>
-      )}
+      <GridItem area='left'>
+        <Link onClick={() => navigate(-1)}>
+          <Icon as={BsChevronLeft} boxSize='6' />
+        </Link>
+      </GridItem>
       <GridItem area='header'>
         <Heading as='h1' textAlign='center' whiteSpace='nowrap' fontSize='2xl'>
           week2 과제
         </Heading>
       </GridItem>
       <GridItem area='right' textAlign='right'>
-        {rightComp}
+        <Link to='/reservations'>
+          <Icon gridArea='unset' as={BsCart2} boxSize='6' />
+        </Link>
+        <Link onClick={() => navigate(+1)}>
+          <Icon as={BsChevronRight} boxSize='6' ml='20px' />
+        </Link>
       </GridItem>
     </Grid>
   );
