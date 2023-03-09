@@ -12,17 +12,19 @@ import {
   useDisclosure,
   AspectRatio,
   Button,
+  useToast,
 } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { RiShoppingBag2Fill } from 'react-icons/ri';
 
-const ProductItem = ({ product, setShowAlert }) => {
+const ProductItem = ({ product }) => {
   const { idx, name, mainImage, price, spaceCategory, maximumPurchases } =
     product;
 
   const [quantityNum, setQuantityNum] = useState(1);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const toast = useToast();
 
   const { addProduct } = useProductActionContext();
 
@@ -36,17 +38,19 @@ const ProductItem = ({ product, setShowAlert }) => {
     e.stopPropagation();
     if (quantityNum === 1) return;
     setQuantityNum(prev => prev - 1);
-    setShowAlert(false);
   };
 
   const quantityPlus = e => {
     e.stopPropagation();
     if (quantityNum === maximumPurchases) {
-      setShowAlert(true);
+      toast({
+        title: '최대 구매 가능한 수량입니다',
+        status: 'error',
+        isClosable: true,
+      });
       return;
     }
     setQuantityNum(prev => prev + 1);
-    setShowAlert(false);
   };
 
   return (
