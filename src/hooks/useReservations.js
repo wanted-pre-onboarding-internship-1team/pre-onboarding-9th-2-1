@@ -6,42 +6,28 @@ function productReducer(productList, action) {
 
   switch (action.type) {
     case 'INCREASE':
-      const [increaseProduct, increaseProductIndex] = findTargetItemAndIndex(
-        productList,
-        targetIdx
-      );
-      if (increaseProduct.currentCount < increaseProduct.maximumPurchases) {
-        increaseProduct.currentCount += 1;
-      }
-
-      const [prevIncreaseList, afterIncreaseList] = getListBetweenTarget(
-        productList,
-        increaseProductIndex
-      );
-
-      return [
-        ...prevIncreaseList,
-        { ...increaseProduct },
-        ...afterIncreaseList,
-      ];
     case 'DECREASE':
-      const [decreaseProduct, decreaseProductIndex] = findTargetItemAndIndex(
+      const [targetProduct, targetProductIndex] = findTargetItemAndIndex(
         productList,
         targetIdx
       );
-      if (decreaseProduct.currentCount > 0) {
-        decreaseProduct.currentCount -= 1;
+      if (
+        action.type === 'INCREASE' &&
+        targetProduct.currentCount < targetProduct.maximumPurchases
+      ) {
+        targetProduct.currentCount += 1;
       }
 
-      const [prevDecreaseList, afterDecreaseList] = getListBetweenTarget(
+      if (action.type === 'DECREASE' && targetProduct.currentCount > 0) {
+        targetProduct.currentCount -= 1;
+      }
+
+      const [prevProductList, afterProductList] = getListBetweenTarget(
         productList,
-        decreaseProductIndex
+        targetProductIndex
       );
-      return [
-        ...prevDecreaseList,
-        { ...decreaseProduct },
-        ...afterDecreaseList,
-      ];
+
+      return [...prevProductList, { ...targetProduct }, ...afterProductList];
     case 'Delete':
       return productList.filter(item => item.idx !== targetIdx);
     default:
