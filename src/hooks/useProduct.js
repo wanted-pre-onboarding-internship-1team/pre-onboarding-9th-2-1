@@ -1,3 +1,4 @@
+import { getLocalStorage } from '../util/getLocalStorage';
 import { useReducer } from 'react';
 
 const productReducer = (products, action) => {
@@ -5,10 +6,17 @@ const productReducer = (products, action) => {
 
   switch (action.type) {
     case 'ADD':
-      const newProductList = [...products, { ...newProduct, count: 1 }];
-      localStorage.setItem('products', JSON.stringify(newProductList));
+      const index = products.findIndex(
+        product => product.idx === newProduct.idx
+      );
 
-      return newProductList;
+      if (index === -1) {
+        const newProductList = [...products, { ...newProduct, count: 1 }];
+        localStorage.setItem('products', JSON.stringify(newProductList));
+        return newProductList;
+      }
+
+      return products;
     case 'DELETE':
       const deletedList = products.filter(
         item => item.idx !== targetProduct.idx
@@ -17,14 +25,15 @@ const productReducer = (products, action) => {
 
       return deletedList;
     case 'INCREASE':
-      const increaseProducts = products.map(product => {
+      const increasedList = products.map(product => {
         if (product.idx === targetProduct.idx) {
           return { ...product, count: product.count + 1 };
         }
         return product;
       });
+      localStorage.setItem('products', JSON.stringify(increasedList));
 
-      return increaseProducts;
+      return increasedList;
     case 'DECREASE':
       const decreaseProducts = products.map(product => {
         if (product.idx === targetProduct.idx) {
@@ -32,15 +41,22 @@ const productReducer = (products, action) => {
         }
         return product;
       });
+      const decreasedList = decreaseProducts.filter(
+        product => product.count > 0
+      );
+      localStorage.setItem('products', JSON.stringify(decreasedList));
 
-      return decreaseProducts.filter(product => product.count > 0);
+      return decreasedList;
     default:
       throw Error(`${action.type} : 알 수 없는 액션 타입입니다.`);
   }
 };
 
 export const useProduct = () => {
-  const [response, dispatch] = useReducer(productReducer, []);
+  const [response, dispatch] = useReducer(
+    productReducer,
+    getLocalStorage('products', [])
+  );
 
   const addProduct = newProduct => {
     dispatch({ type: 'ADD', newProduct });
