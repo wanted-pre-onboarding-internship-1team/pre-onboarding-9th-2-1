@@ -5,7 +5,7 @@ const productReducer = (products, action) => {
 
   switch (action.type) {
     case 'ADD':
-      const newProductList = [...products, newProduct];
+      const newProductList = [...products, { ...newProduct, count: 1 }];
       localStorage.setItem('products', JSON.stringify(newProductList));
 
       return newProductList;
@@ -16,6 +16,26 @@ const productReducer = (products, action) => {
       localStorage.setItem('products', JSON.stringify(deletedList));
 
       return deletedList;
+    case 'IINCREASE':
+      const increaseProducts = products.map(product => {
+        if (product.id === targetProduct.id) {
+          return { ...product, count: product.count + 1 };
+        } else {
+          return product;
+        }
+      });
+
+      return increaseProducts;
+    case 'DECREASE':
+      const decreaseProducts = products.map(product => {
+        if (product.id === targetProduct.id) {
+          return { ...product, count: product.count - 1 };
+        } else {
+          return product;
+        }
+      });
+
+      return decreaseProducts.filter(product => product.count > 0);
     default:
       throw Error(`${action.type} : 알 수 없는 액션 타입입니다.`);
   }
@@ -32,5 +52,16 @@ export const useProduct = () => {
     dispatch({ type: 'DELETE', targetProduct });
   };
 
-  return [response, { addProduct, deleteProduct }];
+  const increaseCount = targetProduct => {
+    dispatch({ type: 'INCREASE', targetProduct });
+  };
+
+  const decreaseCount = targetProduct => {
+    dispatch({ type: 'DECREASE', targetProduct });
+  };
+
+  return [
+    response,
+    { addProduct, deleteProduct, increaseCount, decreaseCount },
+  ];
 };
