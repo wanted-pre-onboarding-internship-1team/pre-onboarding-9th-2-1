@@ -5,10 +5,31 @@ const productReducer = (products, action) => {
 
   switch (action.type) {
     case 'ADD':
-      const newProductList = [...products, newProduct];
+      const find = products.find(item => {
+        return item.idx === newProduct.idx;
+      });
+      //처음 등록되는 상품일시
+      if (find === undefined) {
+        localStorage.setItem(
+          'products',
+          JSON.stringify([...products, { ...newProduct, count: 1 }])
+        );
+        return [...products, { ...newProduct, count: 1 }];
+      }
+      // 기존에 있는 상품일때
+      const newProductList = products.map(item => {
+        // 최대수량이 넘어가면 그대로 기존꺼 리턴
+        if (item.idx === newProduct.idx) {
+          if (item.count + 1 > item.maximumPurchases) {
+            return item;
+          }
+          return { ...item, count: item.count + 1 };
+        }
+        return item;
+      });
       localStorage.setItem('products', JSON.stringify(newProductList));
-
       return newProductList;
+
     case 'DELETE':
       const deletedList = products.filter(
         item => item.idx !== targetProduct.idx
