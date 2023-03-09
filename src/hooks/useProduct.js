@@ -5,9 +5,22 @@ const productReducer = (products, action) => {
 
   switch (action.type) {
     case 'ADD':
-      const newProductList = [...products, newProduct];
+      const filteredList = products.filter(product => {
+        return product.idx === newProduct.idx;
+      });
+      let newProductList = [];
+      if (filteredList.length > 0) {
+        newProductList = products.map(product => {
+          if (product.idx === newProduct.idx) {
+            product.count++;
+          }
+          return product;
+        });
+      } else {
+        newProduct.count = 1;
+        newProductList = [...products, newProduct];
+      }
       localStorage.setItem('products', JSON.stringify(newProductList));
-
       return newProductList;
     case 'DELETE':
       const deletedList = products.filter(
@@ -22,7 +35,9 @@ const productReducer = (products, action) => {
 };
 
 export const useProduct = () => {
-  const [response, dispatch] = useReducer(productReducer, []);
+  const storagedList = JSON.parse(localStorage.getItem('products')) ?? [];
+
+  const [response, dispatch] = useReducer(productReducer, [...storagedList]);
 
   const addProduct = newProduct => {
     dispatch({ type: 'ADD', newProduct });
