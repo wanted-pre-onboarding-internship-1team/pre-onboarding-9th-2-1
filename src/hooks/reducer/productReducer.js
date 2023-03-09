@@ -8,34 +8,14 @@ const productReducer = (products, action) => {
       const filteredList = products.filter(product => {
         return product.idx === newProduct.idx;
       });
-      let newProductList = [];
-      if (filteredList.length > 0) {
-        newProductList = products.map(product => {
-          if (
-            product.idx === newProduct.idx &&
-            product.count < product.maximumPurchases
-          ) {
-            product.count++;
-          }
-          return product;
-        });
-      } else {
-        newProduct.count = 1;
-        newProductList = [...products, newProduct];
-      }
-      setReservedStorage(newProductList);
+      const newProductList = addProduct(filteredList, products, newProduct);
       return newProductList;
     case 'SET_COUNT':
-      let countUpdatedList = products.map(product => {
-        if (
-          product.idx === targetProduct.idx &&
-          product.count <= product.maximumPurchases
-        ) {
-          product.count = changedCount;
-        }
-        return product;
-      });
-      countUpdatedList = countUpdatedList.filter(product => product.count > 0);
+      const countUpdatedList = updateCount(
+        products,
+        targetProduct,
+        changedCount
+      );
       setReservedStorage(countUpdatedList);
       return countUpdatedList;
     case 'DELETE':
@@ -48,5 +28,38 @@ const productReducer = (products, action) => {
       throw Error(`${action.type} : 알 수 없는 액션 타입입니다.`);
   }
 };
+
+function addProduct(filteredList, products, newProduct) {
+  let newProductList = [];
+  if (filteredList.length > 0) {
+    newProductList = products.map(product => {
+      if (
+        product.idx === newProduct.idx &&
+        product.count < product.maximumPurchases
+      ) {
+        product.count++;
+      }
+      return product;
+    });
+  } else {
+    newProduct.count = 1;
+    newProductList = [...products, newProduct];
+  }
+  setReservedStorage(newProductList);
+  return newProductList;
+}
+
+function updateCount(products, targetProduct, changedCount) {
+  let countUpdatedList = products.map(product => {
+    if (
+      product.idx === targetProduct.idx &&
+      product.count <= product.maximumPurchases
+    ) {
+      product.count = changedCount;
+    }
+    return product;
+  });
+  return countUpdatedList.filter(product => product.count > 0) ?? [];
+}
 
 export default productReducer;
