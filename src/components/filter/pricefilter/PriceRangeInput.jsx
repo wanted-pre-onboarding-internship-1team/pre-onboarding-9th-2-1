@@ -28,7 +28,7 @@ function PriceRangeInput({ onAdd }) {
 
   const onClickHandler = useCallback(() => {
     if (minPrice === 0 && maxPrice === 0) return;
-    if (minPrice > maxPrice) {
+    if (parseInt(minPrice) > parseInt(maxPrice)) {
       onAdd({
         min: parseInt(maxPrice),
         max: parseInt(minPrice),
