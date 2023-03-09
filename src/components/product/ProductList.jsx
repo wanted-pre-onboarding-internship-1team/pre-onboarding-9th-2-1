@@ -2,6 +2,7 @@ import { getProduct } from './../../apis/api';
 import ProductItem from './ProductItem';
 import { Divider, VStack } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 const ProductList = () => {
   const [productList, setProductList] = useState([]);
@@ -9,6 +10,13 @@ const ProductList = () => {
   useEffect(() => {
     getProduct().then(({ data }) => setProductList(data));
   }, []);
+
+  const price = useSelector(state => {
+    return state.filterPrice;
+  });
+  const contry = useSelector(state => {
+    return state.filterContry;
+  });
 
   return (
     <VStack
