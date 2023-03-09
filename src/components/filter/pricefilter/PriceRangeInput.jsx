@@ -5,7 +5,7 @@ import {
   Text,
   Button,
 } from '@chakra-ui/react';
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { IoAddOutline } from 'react-icons/io5';
 
 function PriceRangeInput({ onAdd }) {
@@ -26,7 +26,7 @@ function PriceRangeInput({ onAdd }) {
     [MAX]
   );
 
-  const onClickHandler = () => {
+  const onClickHandler = useCallback(() => {
     if (minPrice === 0 && maxPrice === 0) return;
     if (minPrice > maxPrice) {
       onAdd({
@@ -42,7 +42,20 @@ function PriceRangeInput({ onAdd }) {
 
     setMinPrice(0);
     setMaxPrice(0);
-  };
+  }, [maxPrice, minPrice, onAdd]);
+
+  useEffect(() => {
+    const event = e => {
+      if (e.keyCode === 13) {
+        onClickHandler();
+      }
+    };
+    document.addEventListener('keyup', event);
+    return () => {
+      document.removeEventListener('keyup', event);
+    };
+  }, [onClickHandler]);
+
   return (
     <HStack>
       <NumberInput
