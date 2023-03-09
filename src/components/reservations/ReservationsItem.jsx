@@ -9,7 +9,6 @@ import {
   Stack,
   Tag,
   Text,
-  VStack,
 } from '@chakra-ui/react';
 import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';
 

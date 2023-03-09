@@ -1,6 +1,5 @@
 import Header from '../components/common/Header';
 import ReservationsList from '../components/reservations/ReservationsList';
-import { useProductValueContext } from '../contexts/ProductContext';
 import useReservations from '../hooks/useReservations';
 import { Button, Container, Flex } from '@chakra-ui/react';
 
@@ -12,7 +11,7 @@ export default function ReservationsPage() {
     decreaseProduct,
     deleteProduct,
   } = useReservations();
-  console.log(totalPrice);
+
   return (
     <Container maxW='container.sm' backgroundColor='white'>
       <Header noBackBtn={true} />
