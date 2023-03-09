@@ -2,6 +2,8 @@ import { useProductActionContext } from './../../contexts/ProductContext';
 import LazyImage from './../common/LazyImage';
 import ProductDetail from './ProductDetail';
 import {
+  Center,
+  Box,
   Card,
   CardBody,
   CardFooter,
@@ -11,15 +13,17 @@ import {
   Tag,
   useDisclosure,
   AspectRatio,
+  Button,
 } from '@chakra-ui/react';
 import React from 'react';
 import { AiFillDelete } from 'react-icons/ai';
 
 const ReservedProductItem = ({ product }) => {
-  const { idx, name, mainImage, price, spaceCategory } = product;
+  const { idx, name, mainImage, price, spaceCategory, count } = product;
 
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { deleteProduct } = useProductActionContext();
+  const { deleteProduct, increaseCount, decreaseCount } =
+    useProductActionContext();
 
   const onClickHandler = e => {
     e.stopPropagation();
@@ -29,13 +33,12 @@ const ReservedProductItem = ({ product }) => {
   return (
     <>
       <Card
-        onClick={onOpen}
         direction={{ base: 'column', sm: 'row' }}
         overflow='hidden'
         variant='outline'
         cursor='pointer'>
         <AspectRatio width={{ base: '100%', sm: '200px' }} ratio={1}>
-          <LazyImage src={mainImage} alt={name} width='100%' />
+          <LazyImage onClick={onOpen} src={mainImage} alt={name} width='100%' />
         </AspectRatio>
 
         <Stack flex='1'>
@@ -59,6 +62,28 @@ const ReservedProductItem = ({ product }) => {
           </CardBody>
 
           <CardFooter justifyContent='flex-end'>
+            <Button
+              onClick={() => {
+                increaseCount(product);
+              }}>
+              +
+            </Button>
+            <Center
+              w='40px'
+              h='40px'
+              bg='#a1a4cb'
+              borderRadius={5}
+              color='white'>
+              <Box fontWeight='bold' fontSize='lg'>
+                {count}
+              </Box>
+            </Center>
+            <Button
+              onClick={() => {
+                decreaseCount(product);
+              }}>
+              -
+            </Button>
             <IconButton
               onClick={onClickHandler}
               aria-label='삭제하기'

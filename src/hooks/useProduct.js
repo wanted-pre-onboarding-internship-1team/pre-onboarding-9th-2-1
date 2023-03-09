@@ -16,23 +16,21 @@ const productReducer = (products, action) => {
       localStorage.setItem('products', JSON.stringify(deletedList));
 
       return deletedList;
-    case 'IINCREASE':
+    case 'INCREASE':
       const increaseProducts = products.map(product => {
-        if (product.id === targetProduct.id) {
+        if (product.idx === targetProduct.idx) {
           return { ...product, count: product.count + 1 };
-        } else {
-          return product;
         }
+        return product;
       });
 
       return increaseProducts;
     case 'DECREASE':
       const decreaseProducts = products.map(product => {
-        if (product.id === targetProduct.id) {
+        if (product.idx === targetProduct.idx) {
           return { ...product, count: product.count - 1 };
-        } else {
-          return product;
         }
+        return product;
       });
 
       return decreaseProducts.filter(product => product.count > 0);
