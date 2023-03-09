@@ -1,7 +1,7 @@
 import { useReducer } from 'react';
 
 const productReducer = (products, action) => {
-  const { newProduct, targetProduct } = action;
+  const { newProduct, targetProductIdx } = action;
 
   switch (action.type) {
     case 'ADD':
@@ -32,10 +32,9 @@ const productReducer = (products, action) => {
 
     case 'DELETE':
       const deletedList = products.filter(
-        item => item.idx !== targetProduct.idx
+        item => item.idx !== targetProductIdx
       );
       localStorage.setItem('products', JSON.stringify(deletedList));
-
       return deletedList;
     default:
       throw Error(`${action.type} : 알 수 없는 액션 타입입니다.`);
@@ -49,8 +48,8 @@ export const useProduct = () => {
     dispatch({ type: 'ADD', newProduct });
   };
 
-  const deleteProduct = targetProduct => {
-    dispatch({ type: 'DELETE', targetProduct });
+  const deleteProduct = targetProductIdx => {
+    dispatch({ type: 'DELETE', targetProductIdx });
   };
 
   return [response, { addProduct, deleteProduct }];
