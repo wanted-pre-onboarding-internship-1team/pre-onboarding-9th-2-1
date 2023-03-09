@@ -5,11 +5,12 @@ export const ProductFilterValueContext = createContext();
 export const ProductFilterActionContext = createContext();
 
 export const ProductFilterProvider = ({ children }) => {
-  const [products, { filterByPrice }] = useProductFilter();
+  const [products, { filterByPrice, filterBySpace }] = useProductFilter();
 
   return (
     <ProductFilterValueContext.Provider value={{ products }}>
-      <ProductFilterActionContext.Provider value={{ filterByPrice }}>
+      <ProductFilterActionContext.Provider
+        value={{ filterByPrice, filterBySpace }}>
         {children}
       </ProductFilterActionContext.Provider>
     </ProductFilterValueContext.Provider>

@@ -1,19 +1,23 @@
 import { useReducer } from 'react';
 
 const productFilterReducer = (state, action) => {
-  const { priceRange } = action;
+  const { priceRange, selectedSpace } = action;
+
+  const storageList = JSON.parse(localStorage.getItem('productList'));
 
   switch (action.type) {
     case 'filterByPrice':
-      const storageList = JSON.parse(localStorage.getItem('productList'));
-      const filteredList = storageList.filter(
+      const filteredListByPrice = storageList.filter(
         product =>
           product.price >= priceRange[0] && product.price <= priceRange[1]
       );
-      return filteredList;
+      return filteredListByPrice;
 
     case 'filterBySpace':
-      return;
+      const filteredListBySpace = storageList.filter(product =>
+        selectedSpace.includes(product.spaceCategory)
+      );
+      return selectedSpace.length === 0 ? storageList : filteredListBySpace;
 
     default:
       throw Error(`${action.type} : 알 수 없는 액션 타입입니다.`);
@@ -31,9 +35,9 @@ export const useProductFilter = () => {
     dispatch({ type: 'filterByPrice', priceRange });
   };
 
-  // const filterBySpace = () => {
-  //   dispatch({ type: 'filterBySpace' });
-  // };
+  const filterBySpace = selectedSpace => {
+    dispatch({ type: 'filterBySpace', selectedSpace });
+  };
 
-  return [products, { filterByPrice }];
+  return [products, { filterByPrice, filterBySpace }];
 };
