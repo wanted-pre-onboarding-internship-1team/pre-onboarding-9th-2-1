@@ -1,4 +1,4 @@
-import { addCart } from '../store/cartSlice';
+import { addCartItem } from '../store/cartSlice';
 import ShowProductDetail from './ShowProductDetail';
 import {
   Flex,
@@ -15,16 +15,38 @@ import {
   Button,
   useDisclosure,
 } from '@chakra-ui/react';
-import React from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 const ShowProduct = ({ productData }) => {
   const dispatch = useDispatch();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
+  const cartList = useSelector(state => state.cart.cartList);
+  const [isReserved, setIsReserved] = useState(false);
+
   const onReservation = () => {
-    dispatch(addCart(productData));
+    alert('장바구니 담기완료!');
+    dispatch(addCartItem(productData));
+    setIsReserved(true);
   };
+
+  useEffect(() => {
+    const isReserved = cartList.some(item => {
+      return item.idx === productData.idx;
+    });
+    setIsReserved(isReserved);
+  }, []);
+
+  const renderReservationBtn = isReserved ? (
+    <Button variant='solid' colorScheme='blue' isDisabled={true}>
+      예약하기
+    </Button>
+  ) : (
+    <Button variant='solid' colorScheme='blue' onClick={onReservation}>
+      예약하기
+    </Button>
+  );
 
   return (
     <Flex align='center' flex='0 1 33%' padding='5px'>
@@ -52,9 +74,7 @@ const ShowProduct = ({ productData }) => {
         <Divider />
         <CardFooter>
           <ButtonGroup spacing='2'>
-            <Button variant='solid' colorScheme='blue' onClick={onReservation}>
-              예약하기
-            </Button>
+            {renderReservationBtn}
             <Button variant='solid' colorScheme='green' onClick={onOpen}>
               자세히 보기
             </Button>
