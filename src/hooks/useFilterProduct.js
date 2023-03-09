@@ -1,9 +1,8 @@
 import { useReducer, useCallback } from 'react';
 
 const filterProductReducer = (state, action) => {
-  const originProductList = JSON.parse(
-    localStorage.getItem('originProductList')
-  );
+  const originProductList =
+    JSON.parse(localStorage.getItem('originProductList')) || [];
   const { payload } = action;
 
   switch (action.type) {

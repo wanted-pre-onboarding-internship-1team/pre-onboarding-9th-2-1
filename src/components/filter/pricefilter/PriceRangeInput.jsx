@@ -1,3 +1,4 @@
+import useOriginProduct from '../../../hooks/useOriginProduct';
 import {
   HStack,
   NumberInput,
@@ -9,9 +10,7 @@ import React, { useState, useCallback, useEffect } from 'react';
 import { IoAddOutline } from 'react-icons/io5';
 
 function PriceRangeInput({ onAdd }) {
-  const originProductList = JSON.parse(
-    localStorage.getItem('originProductList')
-  );
+  const originProductList = useOriginProduct();
   const MAX =
     originProductList.length !== 0
       ? Math.max(...originProductList.map(product => product.price))
