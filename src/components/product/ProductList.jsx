@@ -30,10 +30,9 @@ const ProductList = ({ filter }) => {
       spacing={4}
       align='stretch'
       p={5}>
-      {filtered &&
-        filtered.map(product => (
-          <ProductItem key={product.idx} product={product} />
-        ))}
+      {filtered?.map(product => (
+        <ProductItem key={product.idx} product={product} />
+      ))}
     </VStack>
   );
 };

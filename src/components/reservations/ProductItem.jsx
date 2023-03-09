@@ -1,6 +1,6 @@
+import ThumbNailImage from '../common/ThumbNailImage';
 import CountChangeArea from './CountChangeArea';
 import ProductBody from './ProductBody';
-import ThumbNailImage from './ThumbNailImage';
 import { Card, Stack } from '@chakra-ui/react';
 
 const ProductItem = ({ product }) => {
