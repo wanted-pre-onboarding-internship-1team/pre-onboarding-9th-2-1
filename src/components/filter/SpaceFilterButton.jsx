@@ -1,19 +1,11 @@
-import { useSelectedFilterContext } from '../../contexts/FilterContext';
+import useSpaceFilter from '../../hooks/useSpaceFilter';
 import { Button } from '@chakra-ui/react';
 
 const SpaceFilterButton = ({ space }) => {
-  const { addSpaceFilter, deleteSpaceFilter, isSelectedSpace } =
-    useSelectedFilterContext();
+  const { buttonColor, handleToggle } = useSpaceFilter(space);
+
   return (
-    <Button
-      colorScheme={isSelectedSpace(space) ? 'green' : 'gray'}
-      onClick={() => {
-        if (isSelectedSpace(space)) {
-          deleteSpaceFilter(space);
-          return;
-        }
-        addSpaceFilter(space);
-      }}>
+    <Button colorScheme={buttonColor} onClick={handleToggle}>
       {space}
     </Button>
   );
