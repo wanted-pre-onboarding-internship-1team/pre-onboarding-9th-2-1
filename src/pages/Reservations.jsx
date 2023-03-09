@@ -1,12 +1,13 @@
+import GoMainButton from '../components/reservations/GoMainButton';
 import ProductItem from '../components/reservations/ProductItem';
 import { useProductValueContext } from '../contexts/ProductContext';
 import { Divider, Text, Container, VStack, Box } from '@chakra-ui/react';
 
 export default function Reservations() {
   const addedList = useProductValueContext();
-
   return (
     <Container maxW='container.sm' backgroundColor='white'>
+      <GoMainButton />
       <VStack
         divider={<Divider borderColor='gray.200' />}
         spacing={4}
