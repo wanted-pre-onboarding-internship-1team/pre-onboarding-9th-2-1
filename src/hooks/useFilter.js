@@ -7,13 +7,18 @@ const useFilter = () => {
   });
   const [spaceCategoryFilter, setSpaceCategoryFilter] = useState([]);
 
-  const initFilter = ({ productList }) => {
-    //List 에서 unique한 지역명과 최소,최대 가격을 알아오는 로직
-    const minPrice = 0;
-    const maxPrice = Number.POSITIVE_INFINITY;
-    const spaceCategoryList = [];
+  const initFilter = productList => {
+    const minPrice = productList.reduce((min, curr) => {
+      return min > curr.price ? curr.price : min;
+    }, Number.POSITIVE_INFINITY);
+    const maxPrice = productList.reduce((max, curr) => {
+      return max > curr.price ? max : curr.price;
+    }, 0);
+    const spaceCategorySet = productList.reduce((spaces, curr) => {
+      return spaces.add(curr.spaceCategory);
+    }, new Set());
     setPriceFilter({ minPrice, maxPrice });
-    setSpaceCategoryFilter(spaceCategoryList);
+    setSpaceCategoryFilter([...spaceCategorySet]);
   };
   return { priceFilter, spaceCategoryFilter, initFilter };
 };
