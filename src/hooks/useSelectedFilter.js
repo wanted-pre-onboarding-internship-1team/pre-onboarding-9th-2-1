@@ -25,6 +25,10 @@ const useSelectedFilter = () => {
     new Set()
   );
 
+  const resetPriceFilter = () => {
+    selectPriceFilter({ minPrice: 0, maxPrice: Number.POSITIVE_INFINITY });
+  };
+
   const addSpaceFilter = newSpace => {
     dispatch({ type: 'ADD', newSpace });
   };
@@ -38,6 +42,7 @@ const useSelectedFilter = () => {
   return {
     selectedPriceFilter,
     selectPriceFilter,
+    resetPriceFilter,
     selectedSpaceCategoryFilter,
     addSpaceFilter,
     deleteSpaceFilter,

@@ -13,6 +13,16 @@ const PriceFilter = () => {
   const handleMinChange = event => setMinPrice(event.target.value);
   const handleMaxChange = event => setMaxPrice(event.target.value);
 
+  const handleSetPrice = () => {
+    if (minPrice < priceFilter.minPrice || maxPrice > priceFilter.maxPrice) {
+      alert(
+        `${priceFilter.minPrice?.toLocaleString()} ~ ${priceFilter.maxPrice?.toLocaleString()} 사이의 값만 입력 가능합니다.`
+      );
+      return;
+    }
+    selectPriceFilter({ minPrice, maxPrice });
+  };
+
   return (
     <HStack>
       <Text>가격</Text>
@@ -25,12 +35,7 @@ const PriceFilter = () => {
         onChange={handleMaxChange}
         placeholder={`최대 : ${priceFilter.maxPrice?.toLocaleString()} 원`}
       />
-      <Button
-        onClick={() => {
-          selectPriceFilter({ minPrice, maxPrice });
-        }}>
-        적용
-      </Button>
+      <Button onClick={handleSetPrice}>적용</Button>
     </HStack>
   );
 };

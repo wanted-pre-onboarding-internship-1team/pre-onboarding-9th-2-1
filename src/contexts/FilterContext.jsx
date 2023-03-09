@@ -10,6 +10,7 @@ export const FilterProvider = ({ children }) => {
   const {
     selectedPriceFilter,
     selectPriceFilter,
+    resetPriceFilter,
     selectedSpaceCategoryFilter,
     addSpaceFilter,
     deleteSpaceFilter,
@@ -20,6 +21,7 @@ export const FilterProvider = ({ children }) => {
   const selectedFilterValue = {
     selectedPriceFilter,
     selectPriceFilter,
+    resetPriceFilter,
     selectedSpaceCategoryFilter,
     addSpaceFilter,
     deleteSpaceFilter,
