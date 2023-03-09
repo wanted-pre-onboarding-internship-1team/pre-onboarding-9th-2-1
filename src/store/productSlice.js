@@ -18,8 +18,7 @@ const productSlice = createSlice({
       const checkboxValue = action.payload.checkboxValue;
       let filteredProduct = state.productList.filter(
         product =>
-          slideValue['min'] <= product.price &&
-          product.price <= slideValue['max']
+          slideValue.min <= product.price && product.price <= slideValue.max
       );
 
       if (checkboxValue.length > 0) {

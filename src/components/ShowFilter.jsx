@@ -39,7 +39,7 @@ const ShowFilter = props => {
   };
 
   const setChecked = target => {
-    if (target.checked == true) {
+    if (target.checked === true) {
       setcheckboxValue(() => {
         return [...checkboxValue, target.value];
       });
@@ -75,7 +75,7 @@ const ShowFilter = props => {
             가격
             <RangeSlider
               aria-label={['min', 'max']}
-              defaultValue={[slideValue['min'], slideValue['max']]}
+              defaultValue={[slideValue.min, slideValue.max]}
               min={0}
               max={30000}
               step={1000}
@@ -85,12 +85,12 @@ const ShowFilter = props => {
               </RangeSliderTrack>
               <RangeSliderThumb boxSize={6} index={0}>
                 <Box color='black' top='100%' position='absolute'>
-                  {slideValue['min']}
+                  {slideValue.min}
                 </Box>
               </RangeSliderThumb>
               <RangeSliderThumb boxSize={6} index={1}>
                 <Box color='black' top='100%' position='absolute'>
-                  {slideValue['max']}
+                  {slideValue.max}
                 </Box>
               </RangeSliderThumb>
             </RangeSlider>

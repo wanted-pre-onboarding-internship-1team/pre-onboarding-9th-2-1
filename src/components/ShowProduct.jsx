@@ -1,3 +1,4 @@
+import { addCart } from '../store/cartSlice';
 import ShowProductDetail from './ShowProductDetail';
 import {
   Flex,
@@ -15,9 +16,15 @@ import {
   useDisclosure,
 } from '@chakra-ui/react';
 import React from 'react';
+import { useDispatch } from 'react-redux';
 
 const ShowProduct = ({ productData }) => {
+  const dispatch = useDispatch();
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const onReservation = () => {
+    dispatch(addCart(productData));
+  };
 
   return (
     <Flex align='center' flex='0 1 33%' padding='5px'>
@@ -45,7 +52,7 @@ const ShowProduct = ({ productData }) => {
         <Divider />
         <CardFooter>
           <ButtonGroup spacing='2'>
-            <Button variant='solid' colorScheme='blue'>
+            <Button variant='solid' colorScheme='blue' onClick={onReservation}>
               예약하기
             </Button>
             <Button variant='solid' colorScheme='green' onClick={onOpen}>
