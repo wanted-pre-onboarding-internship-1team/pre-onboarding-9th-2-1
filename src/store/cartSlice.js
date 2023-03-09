@@ -8,30 +8,64 @@ const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    addCart(state, action) {
+    addCartItem(state, action) {
       const payload = { ...action.payload, isReserved: true, reserveQty: 1 };
       state.cartList = [...state.cartList, payload];
     },
 
-    increaseQty(state, action) {
+    deleteCartItem(state, action) {
+      let newState = state.cartList.slice();
       const idx = action.payload;
-      // const selctedCartItem = state.cartList.filter(item => {
-      //   return item.idx === idx;
-      // });
-      // return state.cartList.map(item => {
-      //   if(item.idx !== idx) {
-      //     return item
-      //   }
-      //   return {
-      //   ...item,
+      newState.splice(idx, 1);
+      return newState;
+    },
 
-      //   }
-      // })
+    increaseQty(state, action) {
+      let newState = state.cartList.slice();
+      const idx = action.payload;
 
-      // selctedCartItem.reserveQty++;
+      newState.map(item => {
+        if (item.idx !== idx) {
+          return item;
+        } else {
+          if (item.reserveQty < item.maximumPurchases) {
+            item.reserveQty++;
+            return {
+              ...item,
+            };
+          } else {
+            return {
+              item,
+            };
+          }
+        }
+      });
+    },
+
+    decreaseQty(state, action) {
+      let newState = state.cartList.slice();
+      const idx = action.payload;
+
+      newState.map(item => {
+        if (item.idx !== idx) {
+          return item;
+        } else {
+          if (item.reserveQty > 1) {
+            item.reserveQty--;
+            return {
+              ...item,
+            };
+          } else {
+            return {
+              item,
+            };
+          }
+        }
+      });
     },
   },
 });
 
-export const { addCart, increaseQty } = cartSlice.actions;
+export const { addCartItem, deleteCartItem, increaseQty, decreaseQty } =
+  cartSlice.actions;
 export default cartSlice.reducer;

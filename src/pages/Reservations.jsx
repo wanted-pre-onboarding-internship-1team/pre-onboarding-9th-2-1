@@ -1,5 +1,5 @@
-import { increaseQty } from '../store/cartSlice';
-import { AddIcon, MinusIcon } from '@chakra-ui/icons';
+import { deleteCartItem, increaseQty, decreaseQty } from '../store/cartSlice';
+import { AddIcon, MinusIcon, DeleteIcon } from '@chakra-ui/icons';
 import {
   Table,
   Thead,
@@ -30,6 +30,7 @@ const Reservations = () => {
               <Th>상품정보</Th>
               <Th>수량</Th>
               <Th isNumeric>상품금액</Th>
+              <Th></Th>
             </Tr>
           </Thead>
           <Tbody>
@@ -49,12 +50,25 @@ const Reservations = () => {
                           dispatch(increaseQty(item.idx));
                         }}
                       />
-                      <IconButton icon={<MinusIcon />} />
+                      <IconButton
+                        icon={<MinusIcon />}
+                        onClick={() => {
+                          dispatch(decreaseQty(item.idx));
+                        }}
+                      />
                     </Td>
                   </Tr>
 
                   <Td isNumeric>
                     {(item.price * item.reserveQty).toLocaleString('ko-KR')}
+                  </Td>
+                  <Td>
+                    <IconButton
+                      icon={<DeleteIcon />}
+                      onClick={() => {
+                        dispatch(deleteCartItem(item.idx));
+                      }}
+                    />
                   </Td>
                 </Tr>
               );
