@@ -1,3 +1,4 @@
+import { useSelectedFilterContext } from '../../contexts/FilterContext';
 import { getProduct } from './../../apis/api';
 import ProductItem from './ProductItem';
 import { Divider, VStack } from '@chakra-ui/react';
@@ -5,9 +6,12 @@ import React, { useEffect, useState } from 'react';
 
 const ProductList = () => {
   const [productList, setProductList] = useState([]);
+  const { isPassedAllFilter } = useSelectedFilterContext();
 
   useEffect(() => {
-    getProduct().then(({ data }) => setProductList(data));
+    getProduct().then(({ data }) => {
+      setProductList(data);
+    });
   }, []);
 
   return (
@@ -16,10 +20,9 @@ const ProductList = () => {
       spacing={4}
       align='stretch'
       p={5}>
-      {productList &&
-        productList.map(product => (
-          <ProductItem key={product.idx} product={product} />
-        ))}
+      {productList?.filter(isPassedAllFilter)?.map(product => (
+        <ProductItem key={product.idx} product={product} />
+      ))}
     </VStack>
   );
 };

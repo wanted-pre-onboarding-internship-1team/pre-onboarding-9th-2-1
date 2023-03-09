@@ -28,6 +28,28 @@ const useSelectedFilter = () => {
   const resetPriceFilter = () => {
     selectPriceFilter({ minPrice: 0, maxPrice: Number.POSITIVE_INFINITY });
   };
+  const isSelectedPriceRange = price => {
+    if (
+      selectedPriceFilter.minPrice <= price &&
+      price <= selectedPriceFilter.maxPrice
+    ) {
+      return true;
+    }
+    return false;
+  };
+
+  const isPassedAllFilter = product => {
+    if (!isSelectedPriceRange(product.price)) {
+      return false;
+    }
+    if (selectedSpaceCategoryFilter.size === 0) {
+      return true;
+    }
+    if (isSelectedSpace(product.spaceCategory)) {
+      return true;
+    }
+    return false;
+  };
 
   const addSpaceFilter = newSpace => {
     dispatch({ type: 'ADD', newSpace });
@@ -43,10 +65,12 @@ const useSelectedFilter = () => {
     selectedPriceFilter,
     selectPriceFilter,
     resetPriceFilter,
+    isSelectedPriceRange,
     selectedSpaceCategoryFilter,
     addSpaceFilter,
     deleteSpaceFilter,
     isSelectedSpace,
+    isPassedAllFilter,
   };
 };
 
