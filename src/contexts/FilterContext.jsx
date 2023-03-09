@@ -16,6 +16,7 @@ export const FilterProvider = ({ children }) => {
     deleteSpaceFilter,
     isSelectedSpace,
     isPassedAllFilter,
+    resetAllFilter,
   } = useSelectedFilter();
 
   const filterValue = { priceFilter, spaceCategoryFilter, initFilter };
@@ -28,6 +29,7 @@ export const FilterProvider = ({ children }) => {
     deleteSpaceFilter,
     isSelectedSpace,
     isPassedAllFilter,
+    resetAllFilter,
   };
 
   return (

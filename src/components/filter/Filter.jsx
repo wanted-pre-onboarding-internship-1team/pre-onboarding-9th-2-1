@@ -1,6 +1,7 @@
 import { getProduct } from '../../apis/api';
 import { useFilterContext } from '../../contexts/FilterContext';
 import PriceFilter from './PriceFilter';
+import ResetFilterButton from './ResetFilterButton';
 import SelectedPrice from './SelectedPrice';
 import SpaceFilter from './SpaceFilter';
 import { Box } from '@chakra-ui/react';
@@ -17,6 +18,7 @@ const Filter = () => {
       <PriceFilter />
       <SelectedPrice />
       <SpaceFilter />
+      <ResetFilterButton />
     </Box>
   );
 };

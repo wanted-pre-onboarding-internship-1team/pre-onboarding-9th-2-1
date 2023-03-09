@@ -10,6 +10,8 @@ const spaceCategoryReducer = (spaceCategories, action) => {
       const { deleteSpace } = action;
       spaceCategories.delete(deleteSpace);
       return new Set(spaceCategories);
+    case 'RESET':
+      return new Set();
     default:
       throw new Error('알 수 없는 액션 타입입니다.');
   }
@@ -60,6 +62,14 @@ const useSelectedFilter = () => {
   const isSelectedSpace = space => {
     return selectedSpaceCategoryFilter.has(space);
   };
+  const resetSpaceFilter = () => {
+    dispatch({ type: 'RESET' });
+  };
+
+  const resetAllFilter = () => {
+    resetPriceFilter();
+    resetSpaceFilter();
+  };
 
   return {
     selectedPriceFilter,
@@ -71,6 +81,7 @@ const useSelectedFilter = () => {
     deleteSpaceFilter,
     isSelectedSpace,
     isPassedAllFilter,
+    resetAllFilter,
   };
 };
 
