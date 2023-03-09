@@ -1,3 +1,5 @@
+import setReservedStorage from '../../util/setReservedStorage';
+
 const productReducer = (products, action) => {
   const { newProduct, targetProduct, changedCount } = action;
 
@@ -21,7 +23,7 @@ const productReducer = (products, action) => {
         newProduct.count = 1;
         newProductList = [...products, newProduct];
       }
-      localStorage.setItem('products', JSON.stringify(newProductList));
+      setReservedStorage(newProductList);
       return newProductList;
     case 'SET_COUNT':
       let countUpdatedList = products.map(product => {
@@ -34,14 +36,13 @@ const productReducer = (products, action) => {
         return product;
       });
       countUpdatedList = countUpdatedList.filter(product => product.count > 0);
-      localStorage.setItem('products', JSON.stringify(countUpdatedList));
+      setReservedStorage(countUpdatedList);
       return countUpdatedList;
     case 'DELETE':
       const deletedList = products.filter(
         item => item.idx !== targetProduct.idx
       );
-      localStorage.setItem('products', JSON.stringify(deletedList));
-
+      setReservedStorage(deletedList);
       return deletedList;
     default:
       throw Error(`${action.type} : 알 수 없는 액션 타입입니다.`);
