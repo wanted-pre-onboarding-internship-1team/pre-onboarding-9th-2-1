@@ -10,13 +10,33 @@ import {
   DrawerContent,
   DrawerCloseButton,
   useDisclosure,
+  useToast,
 } from '@chakra-ui/react';
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 
-const ProductFilters = () => {
+const ProductFilters = ({ filter, setFilter }) => {
+  const [checkValue, setCheckValue] = useState(filter.check);
+  const [rangeValue, setRangeValue] = useState(filter.range);
   const btnOpenRef = useRef();
 
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const toast = useToast();
+
+  const onClickHandler = () => {
+    if (!checkValue.length && !Object.keys(rangeValue).length) {
+      toast({
+        title: `필터가 적용되지 않았습니다.`,
+        status: 'info',
+        variant: 'subtle',
+        isClosable: true,
+      });
+    }
+
+    const filter = { check: checkValue, range: rangeValue };
+    localStorage.setItem('productFilter', JSON.stringify(filter));
+    setFilter(filter);
+    onClose();
+  };
 
   return (
     <>
@@ -45,15 +65,25 @@ const ProductFilters = () => {
               spacing={4}
               align='stretch'>
               <Box mt='2'>
-                <CheckFilter />
+                <CheckFilter
+                  checkValue={checkValue}
+                  setCheckValue={setCheckValue}
+                />
               </Box>
 
               <Box mt='6'>
-                <RangeFilter />
+                <RangeFilter
+                  rangeValue={rangeValue}
+                  setRangeValue={setRangeValue}
+                />
               </Box>
             </VStack>
 
-            <Button colorScheme='linkedin' mt='6' w='100%'>
+            <Button
+              onClick={onClickHandler}
+              colorScheme='linkedin'
+              mt='6'
+              w='100%'>
               조회하기
             </Button>
           </DrawerBody>

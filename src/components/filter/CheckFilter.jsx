@@ -2,8 +2,16 @@ import { Text, Stack, Flex } from '@chakra-ui/layout';
 import { Checkbox, CheckboxGroup, Button } from '@chakra-ui/react';
 import React from 'react';
 
-const CheckFilter = () => {
+const CheckFilter = ({ checkValue, setCheckValue }) => {
   const checkList = ['강원', '서울', '부산', '대구', '제주'];
+
+  const onChangeHandler = e => {
+    setCheckValue(e);
+  };
+
+  const onClickHandler = () => {
+    setCheckValue([]);
+  };
 
   return (
     <>
@@ -12,10 +20,18 @@ const CheckFilter = () => {
           위치
         </Text>
 
-        <Button size='xs'>필터 적용 해제</Button>
+        <Button
+          size='xs'
+          isDisabled={!checkValue?.length}
+          onClick={onClickHandler}>
+          필터 적용 해제
+        </Button>
       </Flex>
 
-      <CheckboxGroup colorScheme='linkedin'>
+      <CheckboxGroup
+        colorScheme='linkedin'
+        value={checkValue}
+        onChange={onChangeHandler}>
         <Stack direction='row' flexWrap='wrap' gap='2'>
           {checkList &&
             checkList.map((item, idx) => (
