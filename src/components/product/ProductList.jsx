@@ -38,12 +38,10 @@ const ProductList = ({ filter }) => {
         <Alert status='error'>
           <Box display='flex'>
             <AlertIcon />
-            <Box>
-              <AlertTitle>Your browser is outdated!</AlertTitle>
-              <AlertDescription>
-                Your Chakra experience may be degraded.
-              </AlertDescription>
-            </Box>
+            <AlertTitle>Your browser is outdated!</AlertTitle>
+            <AlertDescription>
+              Your Chakra experience may be degraded.
+            </AlertDescription>
           </Box>
         </Alert>
       )}
