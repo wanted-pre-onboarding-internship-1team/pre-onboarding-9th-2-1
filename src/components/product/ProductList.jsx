@@ -1,36 +1,16 @@
-import { getProduct } from './../../apis/api';
-import { useFilter } from './../../hooks/useFilter';
+import useProductList from '../../hooks/useProductList';
 import ProductItem from './ProductItem';
 import { Divider, VStack } from '@chakra-ui/react';
-import React, { useEffect, useRef } from 'react';
 
 const ProductList = ({ filter }) => {
-  const productList = useRef([]);
-  const [filtered, { multiFilter }] = useFilter(filter);
-
-  const applyFilter = productList => {
-    multiFilter(productList);
-  };
-
-  useEffect(() => {
-    getProduct()
-      .then(({ data }) => (productList.current = data))
-      .then(productList => applyFilter(productList, filter));
-  }, []);
-
-  useEffect(() => {
-    if (!productList.current.length) return;
-
-    applyFilter(productList.current, filter);
-  }, [filter]);
-
+  const filteredList = useProductList(filter);
   return (
     <VStack
       divider={<Divider borderColor='gray.200' />}
       spacing={4}
       align='stretch'
       p={5}>
-      {filtered?.map(product => (
+      {filteredList?.map(product => (
         <ProductItem key={product.idx} product={product} />
       ))}
     </VStack>
