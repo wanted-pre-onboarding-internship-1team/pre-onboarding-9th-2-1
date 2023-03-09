@@ -12,7 +12,10 @@ function PriceRangeInput({ onAdd }) {
   const originProductList = JSON.parse(
     localStorage.getItem('originProductList')
   );
-  const MAX = Math.max(...originProductList.map(product => product.price));
+  const MAX =
+    originProductList.length !== 0
+      ? Math.max(...originProductList.map(product => product.price))
+      : 0;
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(0);
 
