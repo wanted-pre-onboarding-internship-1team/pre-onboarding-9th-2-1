@@ -11,13 +11,15 @@ const productFilterReducer = (state, action) => {
         product =>
           product.price >= priceRange[0] && product.price <= priceRange[1]
       );
+      // localStorage.setItem('productList', JSON.stringify(filteredListByPrice));
       return filteredListByPrice;
 
     case 'filterBySpace':
       const filteredListBySpace = storageList.filter(product =>
         selectedSpace.includes(product.spaceCategory)
       );
-      return selectedSpace.length === 0 ? storageList : filteredListBySpace;
+      // localStorage.setItem('productList', JSON.stringify(filteredListBySpace));
+      return filteredListBySpace;
 
     default:
       throw Error(`${action.type} : 알 수 없는 액션 타입입니다.`);

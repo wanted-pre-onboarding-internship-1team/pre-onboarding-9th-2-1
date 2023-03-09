@@ -1,5 +1,12 @@
 import { useProductFilterActionContext } from '../../contexts/ProductFilterContext';
-import { Box, Checkbox, CheckboxGroup, Stack } from '@chakra-ui/react';
+import {
+  Box,
+  Button,
+  Center,
+  Checkbox,
+  CheckboxGroup,
+  Stack,
+} from '@chakra-ui/react';
 import React, { useState } from 'react';
 
 const SPACES = [
@@ -19,31 +26,39 @@ export default function Space() {
   const handleCheckbox = e => {
     const { checked, value } = e.target;
     if (checked) {
-      setSelectSpace([...selectSpace, value]);
-      filterBySpace([...selectSpace, value]);
+      setSelectSpace(prev => [...prev, value]);
     } else {
-      setSelectSpace(selectSpace.filter(space => space !== value));
-      filterBySpace(selectSpace.filter(space => space !== value));
+      setSelectSpace(prev => prev.filter(space => space !== value));
     }
   };
 
   return (
-    <Box ml='30px' mt='30px' mb='30px'>
-      <CheckboxGroup colorScheme='gray'>
-        <Stack spacing='30px' direction={['column', 'row']}>
-          {SPACES.map(space => {
-            return (
-              <Checkbox
-                isChecked={selectSpace.includes(space.name)}
-                key={space.id}
-                value={space.name}
-                onChange={handleCheckbox}>
-                {space.name}
-              </Checkbox>
-            );
-          })}
-        </Stack>
-      </CheckboxGroup>
+    <Box mt='30px' mb='30px'>
+      <Box mb='10px'>
+        <CheckboxGroup colorScheme='gray'>
+          <Stack spacing='30px' direction={['column', 'row']}>
+            {SPACES.map(space => {
+              return (
+                <Checkbox
+                  isChecked={selectSpace.includes(space.name)}
+                  key={space.id}
+                  value={space.name}
+                  onChange={handleCheckbox}>
+                  {space.name}
+                </Checkbox>
+              );
+            })}
+          </Stack>
+        </CheckboxGroup>
+      </Box>
+      <Center>
+        <Button
+          marginTop='10px'
+          size='sm'
+          onClick={() => filterBySpace(selectSpace)}>
+          적용
+        </Button>
+      </Center>
     </Box>
   );
 }

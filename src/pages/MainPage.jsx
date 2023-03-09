@@ -17,7 +17,11 @@ export default function MainPage() {
       title: '가격순',
       content: <Price />,
     },
-    { id: 2, title: '공간순', content: <Space /> },
+    {
+      id: 2,
+      title: '공간순',
+      content: <Space />,
+    },
   ];
 
   const rightComp = () => (
