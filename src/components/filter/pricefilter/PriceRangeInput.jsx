@@ -86,9 +86,9 @@ function PriceRangeInput({ onAdd }) {
         size='xs'
         colorScheme='yellow'
         cursor='pointer'
-        as={IoAddOutline}
-        onClick={onClickHandler}
-      />
+        onClick={onClickHandler}>
+        <IoAddOutline />
+      </Button>
     </HStack>
   );
 }

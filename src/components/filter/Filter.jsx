@@ -36,9 +36,17 @@ const isNotFilter = ({ selectedSpace, priceFilter }) => {
 
 function renderFilterIcon(flag) {
   if (!flag) {
-    return <Icon boxSize={6} as={MdFilterAlt} cursor='pointer' />;
+    return (
+      <Icon boxSize={6} cursor='pointer'>
+        <MdFilterAlt />
+      </Icon>
+    );
   }
-  return <Icon boxSize={6} as={MdFilterAltOff} color='red' cursor='pointer' />;
+  return (
+    <Icon boxSize={6} color='red' cursor='pointer'>
+      <MdFilterAltOff />
+    </Icon>
+  );
 }
 
 function Filter() {
