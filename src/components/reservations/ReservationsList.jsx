@@ -13,10 +13,10 @@ export default function ReservationsList({
       spacing={4}
       align='stretch'
       p={5}>
-      {productList.map(item => (
+      {productList?.map(item => (
         <ReservationsItem
           key={item.idx + item.description}
-          {...item}
+          product={item}
           increaseProduct={increaseProduct}
           decreaseProduct={decreaseProduct}
           deleteProduct={deleteProduct}

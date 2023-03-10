@@ -12,20 +12,13 @@ import {
 } from '@chakra-ui/react';
 import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';
 
-export default function ReservationsItem(data) {
-  const {
-    idx,
-    name,
-    description,
-    price,
-    mainImage,
-    currentCount,
-    maximumPurchases,
-    spaceCategory,
-    decreaseProduct,
-    increaseProduct,
-    deleteProduct,
-  } = data;
+export default function ReservationsItem({
+  product,
+  increaseProduct,
+  decreaseProduct,
+  deleteProduct,
+}) {
+  const { name, price, mainImage, currentCount, spaceCategory } = product;
   return (
     <Card
       direction={{ base: 'column', sm: 'row' }}
@@ -44,7 +37,7 @@ export default function ReservationsItem(data) {
             right={6}
             minW={10}
             textAlign='center'
-            onClick={() => deleteProduct(idx)}>
+            onClick={() => deleteProduct(product)}>
             &times;
           </Text>
           <Text fontSize='md' noOfLines={1} pr={10}>
@@ -61,13 +54,13 @@ export default function ReservationsItem(data) {
             <IconButton
               aria-label='빼기'
               icon={<AiOutlineMinus />}
-              onClick={() => decreaseProduct(idx)}
+              onClick={() => decreaseProduct(product)}
             />
             <div>{currentCount}</div>
             <IconButton
               aria-label='더하기'
               icon={<AiOutlinePlus />}
-              onClick={() => increaseProduct(idx)}
+              onClick={() => increaseProduct(product)}
             />
           </HStack>
           <Text fontWeight='bold' fontSize='md'>
