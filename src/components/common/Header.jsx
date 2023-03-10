@@ -30,6 +30,7 @@ const Header = () => {
       <GridItem area='right' textAlign='right'>
         <Link to='/reservations'>
           <Icon gridArea='unset' as={BsCart2} boxSize='6' />
+          {/* <Box w='20px' h='20px' borderRadius='50%' backgroundColor='tomato' /> */}
         </Link>
         <Link onClick={() => navigate(+1)}>
           <Icon as={BsChevronRight} boxSize='6' ml='20px' />

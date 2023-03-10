@@ -22,6 +22,7 @@ const ProductItem = ({ product }) => {
     product;
 
   const [quantity, setQuantity] = useState(1);
+  // const basketQuantity = useRef();
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
@@ -30,7 +31,15 @@ const ProductItem = ({ product }) => {
 
   const onClickHandler = e => {
     e.stopPropagation();
+    toast({
+      title: '장바구니에 담겼습니다.',
+      status: 'success',
+      isClosable: true,
+    });
     addProduct(product, quantity);
+    // basketQuantity.current = JSON.parse(
+    //   localStorage.getItem('products')
+    // ).length;
   };
 
   const quantityMinus = e => {
@@ -43,7 +52,7 @@ const ProductItem = ({ product }) => {
     e.stopPropagation();
     if (quantity === maximumPurchases) {
       toast({
-        title: '최대 구매 가능한 수량입니다',
+        title: '최대 구매 가능한 수량입니다.',
         status: 'error',
         isClosable: true,
       });
@@ -85,12 +94,17 @@ const ProductItem = ({ product }) => {
           </CardBody>
 
           <CardFooter alignItems='center' justifyContent='flex-end'>
-            <Stack direction='row' spacing={2} align='center'>
+            <Stack
+              direction='row'
+              backgroundColor={`var(--chakra-colors-gray-200)`}
+              borderRadius='5px'
+              p={1}
+              spacing={2}
+              align='center'>
               <Button
-                backgroundColor='transparent'
+                backgroundColor='white'
                 border='1px'
                 size='xs'
-                ml={1}
                 fontSize='md'
                 onClick={quantityMinus}>
                 -
@@ -99,7 +113,7 @@ const ProductItem = ({ product }) => {
                 {quantity}
               </Text>
               <Button
-                backgroundColor='transparent'
+                backgroundColor='white'
                 border='1px'
                 size='xs'
                 fontSize='md'
