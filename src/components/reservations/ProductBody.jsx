@@ -1,6 +1,6 @@
 import ProductName from '../common/ProductName';
 import ProductPrice from '../common/ProductPrice';
-import DeleteAlert from './DeleteAlert';
+import DeleteButton from './productBody/DeleteButton';
 import { CardBody, Tag } from '@chakra-ui/react';
 
 const ProductBody = ({ product }) => {
@@ -8,7 +8,7 @@ const ProductBody = ({ product }) => {
 
   return (
     <CardBody position='relative'>
-      <DeleteAlert reservationItem={product} />
+      <DeleteButton product={product} />
       <ProductName name={name} />
       <ProductPrice price={price} />
       <Tag>{spaceCategory}</Tag>
