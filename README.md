@@ -130,7 +130,7 @@ http://wanted-intenship-project1.s3-website.ap-northeast-2.amazonaws.com/
 - 여행 상품의 구매 수량을 변경 가능할 수 있도록 해주세요.
 - 장바구니에 있는 여행 상품의 총 결제액 수를 계산하여 표시해주세요
 
-### 4. Eslint
+## Eslint
 
 ```
   "extends": ["react-app", "plugin:prettier/recommended"],
@@ -159,7 +159,8 @@ http://wanted-intenship-project1.s3-website.ap-northeast-2.amazonaws.com/
 ```
 
 <br/>
-### 5. Prettier
+
+## Prettier
 
 ```
 {
