@@ -1,17 +1,16 @@
-# 원티드 프리온보딩 1주차 첫 번째 과제
+# 원티드 프리온보딩 Week2 - 과제 | 라이크어로컬
 
 <br />
 
 ## ✏️ 과제 설명
+여행 상품 리스트를 보고 장바구니에 저장할 수 있는 사이트 구현
 
 <br />
 
 ## 💡 프로젝트 실행 방법
 
 ```
-git clone https://github.com/wanted-pre-onboarding-internship-1team/wanted-pre-onboarding-internship-1team-project_1.git
-cd wanted-pre-onboarding-internship-1team-project_1/
-echo "REACT_APP_BASE_URL = {api 호출 주소}" > .env
+git clone https://github.com/wanted-pre-onboarding-internship-1team/pre-onboarding-9th-2-1.git
 npm install
 npm start
 ```
@@ -26,7 +25,7 @@ http://wanted-intenship-project1.s3-website.ap-northeast-2.amazonaws.com/
 
 ## 🛠 기술 스택
 
-<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=JavaScript&logoColor=white"/> <img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=React&logoColor=white"/> <img src="https://img.shields.io/badge/styled-component-DB7093?style=flat-square&logo=styled-components&logoColor=white"/> <img src="https://img.shields.io/badge/Axios-5A29E4?style=flat-square&logo=Axios&logoColor=white"/> <img src="https://img.shields.io/badge/React Router-CA4245?style=flat-square&logo=React Router&logoColor=white">
+<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=JavaScript&logoColor=white"/> <img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=React&logoColor=white"/> <img src="https://img.shields.io/badge/Chakra UI-319795?style=flat-square&logo=Chakra UI&logoColor=white"/> <img src="https://img.shields.io/badge/Axios-5A29E4?style=flat-square&logo=Axios&logoColor=white"/> <img src="https://img.shields.io/badge/React Router-CA4245?style=flat-square&logo=React Router&logoColor=white">
 
 <br />
 
@@ -37,51 +36,57 @@ http://wanted-intenship-project1.s3-website.ap-northeast-2.amazonaws.com/
 ├── App.js
 ├── index.js
 ├── apis # api 서버와 통신하는 비즈니스 로직
-│   ├── temp.js
-│   ├── temp.js
-│   └── temp.js
+│   └── api.js
 ├── components
 │   ├── common
-│   │   ├── temp.jsx
-│   │   ├── temp
-│   │   │   └── temp.jsx
-│   │   └── temp
-│   │       └── temp.jsx
-│   └── temp
-│       ├── temp.jsx
-│       └── temp.jsx
-├── const
-│   └── temp.js
+│   │   ├── Header.jsx
+│   │   ├── LazyImage.jsx
+│   │   ├── ProductName.jsx
+│   │   ├── ProductNumber.jsx
+│   │   ├── ProductPrice.jsx
+│   │   └── ThumbNailImage.jsx
+│   ├── filter
+│   │   ├── CheckFilter.jsx
+│   │   ├── Filters.jsx
+│   │   └── RangeFilter.jsx
+│   ├── product
+│   │   ├── ProductDetail.jsx
+│   │   ├── ProductItem.jsx
+│   │   └── ProductList.jsx
+│   ├── reservations
+│   │   ├── productBody
+│   │   │   └── DeleteButton.jsx
+│   │   ├── CountChangeArea.jsx
+│   │   ├── ProductBody.jsx
+│   │   ├── ProductItem.jsx
+│   │   ├── ProductList.jsx
+│   │   └── TotalPrice.jsx
+├── contexts
+│   └── ProductContext.jsx
 ├── hooks
-│   ├── temp.js
-│   └── temp.js
+│   ├── reducer
+│   │   └── productReducer.js
+│   ├── useAddProduct.js
+│   ├── useFilter.js
+│   ├── useProduct.js
+│   └── useProductList.js
 ├── pages
-│   ├── temp
-│   │   └── temp.jsx
-│   ├── temp
-│   │   └── temp.jsx
-│   └── temp
-│       └── temp.jsx
-├── routers
-│   ├── temp.jsx
-│   ├── temp.jsx
+│   ├── MainPage.jsx
+│   └── Reservations.jsx
+├── router
 │   └── Router.jsx
 ├── style
-│   └── temp.js
+│   └── customTheme.js
 └── utils
-    └── temp.js
-
+│   └── getLocalStorage.js
+    └── setReservedStorage.js
 ```
-
-### 코드 구조
-
-## Best Practice 산정
 
 <br />
 
 ## 👏 협업 방법
 
-주된 커뮤니케이션 툴로 [**팀 노션**](https://www.notion.so/1-48d83304b94c42ad8352fcf6e7973b9f?pvs=4) 페이지와 **디스코드**, **ZEP**을 사용했습니다.
+주된 커뮤니케이션 툴로 [**팀 노션**](https://www.notion.so/1-48d83304b94c42ad8352fcf6e7973b9f?pvs=4) 페이지와 **디스코드**, **Google meet**를 사용했습니다.
 
 ### **노션 페이지**
 
@@ -89,22 +94,41 @@ http://wanted-intenship-project1.s3-website.ap-northeast-2.amazonaws.com/
 2. commit 컨벤션, git flow 전략, 네이밍을 정의하였습니다.
 3. 팀원들의 역할 분담, 일정 조율을 위해 활용되었습니다.
 
-### **디스코드 & ZEP**
+### ** Google Meet**
 
-1. 팀원들의 의사소통 및 화면 공유를 통한 협업을 위해 활용되었습니다.
+팀원들의 의사소통 및 화면 공유를 통한 협업을 위해 활용되었습니다.
 
 <br />
 
-## ⭐️ 과제 구현
+## ⭐️ 과제 구현 및 Best Practice 산정
 
-### 1. 로그인 / 회원가입
+### 1. 로그인 / 회원가입 
 
 #### ✅ Assignment 1
 
-- 회원가입과 로그인 페이지에 이메일과 비밀번호의 유효성 검사기능을 구현해주세요
-
-  - 이메일 조건: `@` 포함
+  - 유저가 페이지를 처음 열었을 때 “/main”에 도착하도록 만들어주세요
+- main에는 여행 상품 정보 (mock JSON) 를 활용하여 여행 상품 정보를 노출해야합니다.
+- 리스트에서 노출해야 하는 정보: idx, name, mainImage, price, spaceCategory
+- 예약 버튼을 달아 예약 버튼을 클릭시 여행 상품 장바구니에서 사용 할 수 있도록 상품 데이터
+를 저장해주세요.
+- 여행 상품 정보를 클릭했을 때 여행 상품을 자세히 볼 수 있는 모달창을 제작해주세요
+- 모달에서 노출해야 하는 정보: idx, name, mainImage, description, spaceCategory, price, maximumPurchases, registrationDate
     <br />
+    
+#### ✅ Assignment 2
+
+- 여행 상품 리스트의 가격(price), 공간(spaceCategory) 필터 기능을 만들어주세요.
+- 예시)  0 ~ 1000, 150 0~ 3000(가격)
+- 예시) 서울, 부산(공간)
+- 개별 필터링과, 다중 필터링이 모두 가능하도록 구현해주세요
+<br />
+
+ #### ✅ Assignment 3
+
+- 여행 상품 장바구니 (/reservations)를 만들어주세요.
+- 저장한 여행 상품의 리스트를 보여주고 삭제가 가능할 수 있도록 구성해주세요.
+- 여행 상품의 구매 수량을 변경 가능할 수 있도록 해주세요.
+- 장바구니에 있는 여행 상품의 총 결제액 수를 계산하여 표시해주세요
 
 ### 4. Eslint
 
@@ -134,6 +158,7 @@ http://wanted-intenship-project1.s3-website.ap-northeast-2.amazonaws.com/
     ]
 ```
 
+<br/>
 ### 5. Prettier
 
 ```
@@ -150,7 +175,6 @@ http://wanted-intenship-project1.s3-website.ap-northeast-2.amazonaws.com/
 }
 ```
 
-<br />
 
 ## 💗 팀원 소개
 
@@ -171,9 +195,3 @@ http://wanted-intenship-project1.s3-website.ap-northeast-2.amazonaws.com/
      
   </tbody>
 </table>
-
-<br />
-
-## 🙆‍♀️ 역할 분담
-
-<br />
