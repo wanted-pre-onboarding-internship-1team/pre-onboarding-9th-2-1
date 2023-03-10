@@ -94,7 +94,7 @@ http://wanted-intenship-project1.s3-website.ap-northeast-2.amazonaws.com/
 2. commit 컨벤션, git flow 전략, 네이밍을 정의하였습니다.
 3. 팀원들의 역할 분담, 일정 조율을 위해 활용되었습니다.
 
-### ** Google Meet**
+### **Discord / Google Meet**
 
 팀원들의 의사소통 및 화면 공유를 통한 협업을 위해 활용되었습니다.
 
