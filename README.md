@@ -1,4 +1,4 @@
-# 원티드 프리온보딩 Week2 - 과제 | 라이크어로컬
+# 원티드 프리온보딩 Week2 - 라이크어로컬
 
 <br />
 
@@ -18,7 +18,6 @@ npm start
 <br />
 
 ## 📌 배포 링크
-AWS S3를 통해 배포하여 CI/CD 자동화 배포를 구축하였습니다. <br/>
 http://wanted-intenship-project1.s3-website.ap-northeast-2.amazonaws.com/
 
 <br />
@@ -102,18 +101,33 @@ http://wanted-intenship-project1.s3-website.ap-northeast-2.amazonaws.com/
 
 ## ⭐️ 과제 구현 및 Best Practice 산정
 
-### 1. 로그인 / 회원가입 
+### 전반적인 프로젝트
+> - useReducer와 customHook을 사용하여 로직을 분리해 선언적인 컴포넌트를 작성
+> - Redux를 사용할 만큼 프로젝트 단위가 크지않고 괜히 번들 크기만 커져 무거워지므로 ContextAPI를 사용하여 장바구니 및 Product의 전역상태관리
+> - AWS S3를 통해 배포하여 CI/CD 자동화 배포를 구축
+
+<br />
 
 #### ✅ Assignment 1
 
-  - 유저가 페이지를 처음 열었을 때 “/main”에 도착하도록 만들어주세요
+- 유저가 페이지를 처음 열었을 때 “/main”에 도착하도록 만들어주세요
 - main에는 여행 상품 정보 (mock JSON) 를 활용하여 여행 상품 정보를 노출해야합니다.
 - 리스트에서 노출해야 하는 정보: idx, name, mainImage, price, spaceCategory
 - 예약 버튼을 달아 예약 버튼을 클릭시 여행 상품 장바구니에서 사용 할 수 있도록 상품 데이터
 를 저장해주세요.
 - 여행 상품 정보를 클릭했을 때 여행 상품을 자세히 볼 수 있는 모달창을 제작해주세요
 - 모달에서 노출해야 하는 정보: idx, name, mainImage, description, spaceCategory, price, maximumPurchases, registrationDate
-    <br />
+
+![](https://user-images.githubusercontent.com/112826154/224315177-dec3135b-e27d-4da3-9368-d61663c237a2.gif)
+
+>  **💡 Best Practice 산정 이유**
+> - defalt path로 접근 시 Router에서 바로 /main으로 Navigate 하여 불필요한 컴포넌트 생성하지 않게 구현
+> - 리스트 이미지에 lazy loading기법을 사용하여 스크롤 전에는 이미지를 로드시키지 않아 로드 속도 증가
+> - 모달창에도 예약버튼 생성
+> - 예약버튼 클릭 시 toast 팝업, 최대 구매가능 수량보다 더 많이 클릭 시 error toast 팝업 노출로 UX 향상
+> - 상품 데이터 저장 시 새로고침이나 재접속 시 장바구니 정보를 유지하기 위해 localstorage에 저장
+
+<br />
     
 #### ✅ Assignment 2
 
@@ -121,6 +135,13 @@ http://wanted-intenship-project1.s3-website.ap-northeast-2.amazonaws.com/
 - 예시)  0 ~ 1000, 150 0~ 3000(가격)
 - 예시) 서울, 부산(공간)
 - 개별 필터링과, 다중 필터링이 모두 가능하도록 구현해주세요
+
+![](https://user-images.githubusercontent.com/112826154/224315742-76c0fa2c-1eae-4b20-b72c-e6ad4971b4ea.gif
+)
+>  **💡 Best Practice 산정 이유**
+> - chakra drawer을 이용한 깔끔한 UI
+> - 필터 미적용시 toast 팝업으로 UX 향상
+
 <br />
 
  #### ✅ Assignment 3
@@ -130,51 +151,13 @@ http://wanted-intenship-project1.s3-website.ap-northeast-2.amazonaws.com/
 - 여행 상품의 구매 수량을 변경 가능할 수 있도록 해주세요.
 - 장바구니에 있는 여행 상품의 총 결제액 수를 계산하여 표시해주세요
 
-## Eslint
+![](https://user-images.githubusercontent.com/112826154/224316209-5e74e885-0b63-438d-b30b-e41a90fbd8a4.gif)
 
-```
-  "extends": ["react-app", "plugin:prettier/recommended"],
-  "rules": {
-    "no-var": "error", // var 금지
-    "no-multiple-empty-lines": "warn", // 여러 줄 공백 금지
-    "no-console": ["warn", { "allow": ["warn", "error"] }], // console.log() 금지
-    "eqeqeq": "warn", // 일치 연산자 사용 필수
-    "dot-notation": "warn", // 가능하다면 dot notation 사용
-    "no-unused-vars": "warn", // 사용하지 않는 변수 금지
-    "react/destructuring-assignment": "warn", // state, prop 등에 구조분해 할당 적용
-    "react/jsx-pascal-case": "error", // 컴포넌트 이름은 PascalCase로
-    "react/no-direct-mutation-state": "error", // state 직접 수정 금지
-    "react/jsx-no-useless-fragment": "warn", // 불필요한 fragment 금지
-    "react/no-unused-state": "warn", // 사용되지 않는 state
-    "react/jsx-key": "warn", // 반복문으로 생성하는 요소에 key 강제
-    "react/self-closing-comp": "warn", // 셀프 클로징 태그 가능하면 적용
-    "react/jsx-curly-brace-presence": "warn", // jsx 내 불필요한 중괄호 금지
-    "linebreak-style": 0, // 윈도우는 꼭 설정 LF, CRLF 문제 해결위함
-    "prettier/prettier": [
-      "error",
-      {
-        "endOfLine": "auto"
-      }
-    ]
-```
+>  **💡 Best Practice 산정 이유**
+> - 장바구니에 상품이 없을 때 예외 페이지
+> - 상품 수량을 수정할 때 0개가 되면 자동으로 삭제
 
-<br/>
-
-## Prettier
-
-```
-{
-  "tabWidth": 2,
-  "printWidth": 80,
-  "endOfLine": "lf",
-  "arrowParens": "avoid",
-  "singleQuote": true,
-  "jsxSingleQuote": true,
-  "semi": true,
-  "bracketSpacing": true,
-  "bracketSameLine": true
-}
-```
+<br />
 
 
 ## 💗 팀원 소개
