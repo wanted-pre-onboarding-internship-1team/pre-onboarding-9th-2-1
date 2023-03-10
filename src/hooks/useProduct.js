@@ -7,7 +7,7 @@ const productReducer = (products, action) => {
   switch (action.type) {
     case 'ADD':
       if (products.find(product => product.idx === newProduct.idx)) {
-        return [...products];
+        return products;
       }
       const newProductList = [...products, { ...newProduct, count: 1 }];
       localStorage.setItem('products', JSON.stringify(newProductList));
