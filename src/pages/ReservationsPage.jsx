@@ -9,7 +9,7 @@ export default function ReservationsPage() {
   return (
     <Container maxW='container.sm' backgroundColor='white'>
       <Header noBackBtn={true} />
-      <ReservationsList />
+      <ReservationsList productList={productList} />
       <Flex justifyContent='center' paddingX={4}>
         <Button width='100%'>{`총 ${productList
           .reduce((prev, curr) => prev + curr.currentCount * curr.price, 0)
