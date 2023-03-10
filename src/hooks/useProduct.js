@@ -15,7 +15,6 @@ const productReducer = (products, action) => {
         item => item.idx !== targetProduct.idx
       );
       localStorage.setItem('products', JSON.stringify(deletedList));
-
       return deletedList;
     case 'INCREASE':
       return products.map(item => {

@@ -1,12 +1,10 @@
+import { useProductActionContext } from '../../contexts/ProductContext';
 import ReservationsItem from './ReservationsItem';
 import { Divider, VStack } from '@chakra-ui/react';
 
-export default function ReservationsList({
-  productList,
-  increaseProduct,
-  decreaseProduct,
-  deleteProduct,
-}) {
+export default function ReservationsList({ productList }) {
+  const { deleteProduct, decreaseProduct, increaseProduct } =
+    useProductActionContext();
   return (
     <VStack
       divider={<Divider borderColor='gray.200' />}
