@@ -18,7 +18,7 @@ npm start
 <br />
 
 ## 📌 배포 링크
-AWS S3를 통한 CI/CD 자동화 배포를 구축하였습니다.
+AWS S3를 통해 배포하여 CI/CD 자동화 배포를 구축하였습니다. <br/>
 http://wanted-intenship-project1.s3-website.ap-northeast-2.amazonaws.com/
 
 <br />
