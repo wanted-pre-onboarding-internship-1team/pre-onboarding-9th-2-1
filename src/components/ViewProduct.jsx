@@ -48,9 +48,9 @@ const ViewProduct = ({ productData }) => {
   );
 
   return (
-    <Flex align='center' flex='0 1 33%' padding='5px'>
+    <Flex align='center' width='calc(100% / 3)' padding='5px'>
       <Card maxW='sm'>
-        <CardHeader>
+        <CardHeader maxH='90px'>
           <Heading size='md'>
             {productData.idx}
             &#46; &#91;{productData.spaceCategory}
@@ -64,7 +64,7 @@ const ViewProduct = ({ productData }) => {
             borderRadius='lg'
           />
           <Stack mt='6' spacing='3'>
-            <Text>{productData.description}</Text>
+            <Text style={textStyles}>{productData.description}</Text>
             <Text color='blue.600' fontSize='2xl'>
               ₩ {productData.price.toLocaleString('ko-KR')}
             </Text>
@@ -88,6 +88,16 @@ const ViewProduct = ({ productData }) => {
       />
     </Flex>
   );
+};
+
+const textStyles = {
+  height: '72px',
+  textOverflow: 'ellipsis',
+  whiteSpace: 'normal',
+  overflow: 'hidden',
+  display: '-webkit-box',
+  WebkitLineClamp: 3,
+  WebkitBoxOrient: 'vertical',
 };
 
 export default ViewProduct;
