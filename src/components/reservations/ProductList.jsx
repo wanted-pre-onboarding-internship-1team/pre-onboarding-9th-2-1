@@ -100,24 +100,7 @@ export default function ProductList() {
       default:
         break;
     }
-    if (command === '+' && maximum > count) {
-      list = productList.map(data => {
-        if (data.idx === id) {
-          return { ...data, count: data.count + 1 };
-        } else {
-          return data;
-        }
-      });
-    } else if (command === '-' && maximum < count) {
-      list = productList.map(data => {
-        if (data.idx === id) {
-          return { ...data, count: data.count - 1 };
-        } else {
-          return data;
-        }
-      });
-    } else {
-    }
+
     setProductList(list);
   };
 
