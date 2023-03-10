@@ -38,7 +38,6 @@ const productReducer = (products, action) => {
       return deletedList;
 
     case 'EDIT_COUNT':
-      console.log(newCount, targetProductIdx);
       const editedList = products.map(item => {
         if (item.idx === targetProductIdx) {
           return { ...item, count: newCount };
