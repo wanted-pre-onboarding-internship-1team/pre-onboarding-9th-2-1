@@ -19,7 +19,15 @@ import React from 'react';
 import { AiFillDelete } from 'react-icons/ai';
 
 const ReservedProductItem = ({ product }) => {
-  const { idx, name, mainImage, price, spaceCategory, count } = product;
+  const {
+    idx,
+    name,
+    mainImage,
+    price,
+    spaceCategory,
+    count,
+    maximumPurchases,
+  } = product;
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { deleteProduct, increaseCount, decreaseCount } =
@@ -59,6 +67,7 @@ const ReservedProductItem = ({ product }) => {
               {price.toLocaleString()}원
             </Text>
             <Tag>{spaceCategory}</Tag>
+            <Tag>{'최대구매수량 ' + maximumPurchases}</Tag>
           </CardBody>
 
           <CardFooter justifyContent='flex-end'>

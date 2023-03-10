@@ -6,17 +6,13 @@ const productReducer = (products, action) => {
 
   switch (action.type) {
     case 'ADD':
-      const index = products.findIndex(
-        product => product.idx === newProduct.idx
-      );
-
-      if (index === -1) {
-        const newProductList = [...products, { ...newProduct, count: 1 }];
-        localStorage.setItem('products', JSON.stringify(newProductList));
-        return newProductList;
+      if (products.find(product => product.idx === newProduct.idx)) {
+        return [...products];
       }
+      const newProductList = [...products, { ...newProduct, count: 1 }];
+      localStorage.setItem('products', JSON.stringify(newProductList));
 
-      return products;
+      return newProductList;
     case 'DELETE':
       const deletedList = products.filter(
         item => item.idx !== targetProduct.idx
@@ -25,8 +21,12 @@ const productReducer = (products, action) => {
 
       return deletedList;
     case 'INCREASE':
+      const { maximumPurchases } = targetProduct;
       const increasedList = products.map(product => {
-        if (product.idx === targetProduct.idx) {
+        if (
+          product.idx === targetProduct.idx &&
+          product.count < maximumPurchases
+        ) {
           return { ...product, count: product.count + 1 };
         }
         return product;
