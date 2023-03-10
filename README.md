@@ -1,5 +1,7 @@
 # 원티드 프리온보딩 Week2 - 라이크어로컬
 
+
+
 <br />
 
 ## ✏️ 과제 설명
@@ -136,13 +138,14 @@ http://wanted-intenship-project1.s3-website.ap-northeast-2.amazonaws.com/
 - 예시) 서울, 부산(공간)
 - 개별 필터링과, 다중 필터링이 모두 가능하도록 구현해주세요
 
-![](https://user-images.githubusercontent.com/112826154/224315742-76c0fa2c-1eae-4b20-b72c-e6ad4971b4ea.gif
-)
+<br/>
+
+![](https://user-images.githubusercontent.com/112826154/224315742-76c0fa2c-1eae-4b20-b72c-e6ad4971b4ea.gif)
+
 >  **💡 Best Practice 산정 이유**
 > - chakra drawer을 이용한 깔끔한 UI
 > - 필터 미적용시 toast 팝업으로 UX 향상
 
-<br />
 
  #### ✅ Assignment 3
 
