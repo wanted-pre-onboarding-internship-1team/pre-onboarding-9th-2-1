@@ -17,6 +17,7 @@ import {
   IconButton,
   Text,
   AspectRatio,
+  useToast,
 } from '@chakra-ui/react';
 import React from 'react';
 import { RiShoppingBag2Fill } from 'react-icons/ri';
@@ -30,11 +31,31 @@ const ProductDetail = ({ isOpen, onClose, product }) => {
     maximumPurchases,
     description,
     registrationDate,
+    count,
   } = product;
   const { addProduct } = useProductActionContext();
+  const toast = useToast();
 
   const onClickHandler = () => {
     addProduct(product);
+    if (!count || count < maximumPurchases) {
+      toast({
+        title: '상품이 장바구니에 추가되었습니다!',
+        duration: 2000,
+        colorScheme: 'linkedin',
+        isClosable: true,
+      });
+    } else {
+      toast({
+        title: '장바구니 담기 실패!',
+        description: '최대 구매 가능 횟수를 초과하였습니다. ',
+        status: 'error',
+        duration: 2000,
+        colorScheme: 'linkedin',
+
+        isClosable: true,
+      });
+    }
   };
 
   return (
