@@ -5,7 +5,6 @@ import { Link, useNavigate } from 'react-router-dom';
 
 const Header = ({ noBackBtn, rightComp }) => {
   const navigate = useNavigate();
-
   const onClickHandler = () => {
     navigate(-1);
   };

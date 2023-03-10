@@ -9,15 +9,21 @@ import {
   Button,
   Box,
   Container,
+  Icon,
   NumberInput,
   NumberInputField,
   NumberInputStepper,
   NumberIncrementStepper,
   NumberDecrementStepper,
 } from '@chakra-ui/react';
+import { useToast } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
+import { BsChevronLeft } from 'react-icons/bs';
+import { useNavigate } from 'react-router-dom';
 
 export default function ProductList() {
+  const navigate = useNavigate();
+  const toast = useToast();
   const [productList, setProductList] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
   useEffect(() => {
@@ -37,10 +43,64 @@ export default function ProductList() {
   }, [productList]);
 
   // 수량 변경
-  const onSetCount = (id, command) => {
+  const onSetCount = (id, command, maximum, count) => {
     let list = [];
-    let total = 0;
-    if (command === '+') {
+    switch (command) {
+      case '+':
+        if (maximum > count) {
+          list = productList.map(data => {
+            if (data.idx === id) {
+              return { ...data, count: data.count + 1 };
+            } else {
+              return data;
+            }
+          });
+        } else if (maximum <= count) {
+          list = productList.map(data => {
+            if (data.idx === id) {
+              return { ...data, count: data.count };
+            } else {
+              return data;
+            }
+          });
+          toast({
+            title: 'Error',
+            description: '최대 수량 이상을 담을 수 없습니다.',
+            status: 'success',
+            duration: 1000,
+            isClosable: true,
+          });
+        }
+        break;
+      case '-':
+        if (count > 0) {
+          list = productList.map(data => {
+            if (data.idx === id) {
+              return { ...data, count: data.count - 1 };
+            } else {
+              return data;
+            }
+          });
+        } else if (count <= 0) {
+          list = productList.map(data => {
+            if (data.idx === id) {
+              return { ...data, count: data.count };
+            } else {
+              return data;
+            }
+          });
+          toast({
+            title: 'Error',
+            description: '수량을 0개 이하로 선택할 수 없습니다.',
+            duration: 1000,
+            isClosable: true,
+          });
+        }
+        break;
+      default:
+        break;
+    }
+    if (command === '+' && maximum > count) {
       list = productList.map(data => {
         if (data.idx === id) {
           return { ...data, count: data.count + 1 };
@@ -48,7 +108,7 @@ export default function ProductList() {
           return data;
         }
       });
-    } else if (command === '-') {
+    } else if (command === '-' && maximum < count) {
       list = productList.map(data => {
         if (data.idx === id) {
           return { ...data, count: data.count - 1 };
@@ -56,13 +116,9 @@ export default function ProductList() {
           return data;
         }
       });
+    } else {
     }
     setProductList(list);
-
-    for (let i = 0; i < productList.length; i++) {
-      total = total + Number(productList.price) * Number(productList.count);
-    }
-    setTotalPrice(total);
   };
 
   // 상품 삭제
@@ -72,17 +128,37 @@ export default function ProductList() {
     setProductList(list);
   };
 
+  // 뒤로가기
+  const onClickHandler = () => {
+    navigate(-1);
+  };
+
   return (
     <Container maxW='container.sm' backgroundColor='white'>
-      <Text
-        display='flex'
-        alignContent='center'
-        justifyContent='center'
-        fontSize='30'
-        fontWeight='900'
-        m='5'>
-        장바구니
-      </Text>
+      <Box display='flex' flexDirection='row' m='3'>
+        <Icon
+          as={BsChevronLeft}
+          boxSize='6'
+          display='flex'
+          alignContent='center'
+          justifyContent='center'
+          mt='3'
+          mr='3'
+          cursor='pointer'
+          onClick={() => {
+            onClickHandler();
+          }}
+        />
+        <Text
+          display='flex'
+          alignContent='center'
+          justifyContent='center'
+          fontSize='30'
+          fontWeight='900'
+          cursor='default'>
+          상품목록
+        </Text>
+      </Box>
       {productList?.map(data => (
         <Card
           direction={{ base: 'column', sm: 'row' }}
@@ -116,16 +192,30 @@ export default function ProductList() {
               <NumberInput
                 size='sm'
                 maxW={20}
-                defaultValue={data.count}
+                value={data.count}
                 min={0}
                 ml='15'>
                 <NumberInputField />
                 <NumberInputStepper>
                   <NumberIncrementStepper
-                    onClick={() => onSetCount(data.idx, '+')}
+                    onClick={() =>
+                      onSetCount(
+                        data.idx,
+                        '+',
+                        data.maximumPurchases,
+                        data.count
+                      )
+                    }
                   />
                   <NumberDecrementStepper
-                    onClick={() => onSetCount(data.idx, '-')}
+                    onClick={() =>
+                      onSetCount(
+                        data.idx,
+                        '-',
+                        data.maximumPurchases,
+                        data.count
+                      )
+                    }
                   />
                 </NumberInputStepper>
               </NumberInput>
